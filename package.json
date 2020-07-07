@@ -1,8 +1,8 @@
 {
-  "name": "3ofexba",
+  "name": "ionic5-boilerplate-api-socket-ngrx",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Breno Freire",
+  "homepage": "https://github.com/brenofreire",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,9 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "@ionic/pwa-elements": "^1.5.2",
+    "@ionic/storage": "^2.2.0",
+    "@ngrx/store": "^9.2.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -52,5 +55,5 @@
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic 5 boilerplate with socketio, api connection and ngrx setup"
 }
