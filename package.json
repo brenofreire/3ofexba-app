@@ -1,5 +1,5 @@
 {
-  "name": "ionic5-boilerplate-api-socket-ngrx",
+  "name": "3ofexba",
   "version": "0.0.1",
   "author": "Breno Freire",
   "homepage": "https://github.com/brenofreire",
@@ -55,5 +55,5 @@
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   },
-  "description": "An Ionic 5 boilerplate with socketio, api connection and ngrx setup"
+  "description": "Aplicativo de gestão de exclência da 3ª Ofex da Demolay Bahia"
 }
