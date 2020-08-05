@@ -1,27 +1,46 @@
 <ion-content>
-    <section id="forms-login-cadastro">
-        <div class="login-wrapper">
-            <div class="avatar-demolay">
-                <img src="/assets/demolay.png" alt="Desenho de um demolay" />
-            </div>
-            <div class="form-login-cadastro">
-                <ion-item>
-                    <ion-label>Email</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Senha</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-fab-button>
-                    <ion-icon name="play"></ion-icon>
-                </ion-fab-button>
-            </div>
-            <div class="form-opcoes">
-                <ion-button fill="clear">
-                    Cadastre-se
-                </ion-button>
-            </div>
+  <section id="forms-login-cadastro">
+    <div class="login-wrapper">
+      <div class="avatar-demolay" *ngIf="!isCadastro">
+        <img src="/assets/demolay.png" alt="Desenho de um demolay" />
+      </div>
+      <div class="form-login-cadastro">
+        <div class="input-azul">
+          <ion-label>Email</ion-label>
+          <ion-input [(ngModel)]="informacoesUsuario.email"></ion-input>
         </div>
-    </section>
+        <div class="input-azul">
+          <ion-label>Senha</ion-label>
+          <ion-input [(ngModel)]="informacoesUsuario.password" type="password"></ion-input>
+        </div>
+        <div class="input-azul" *ngIf="isCadastro">
+          <ion-label>ID Demolay</ion-label>
+          <ion-input [(ngModel)]="informacoesUsuario.id_demolay"></ion-input>
+        </div>
+        <div class="input-azul" *ngIf="isCadastro">
+          <ion-label>Número do capítulo</ion-label>
+          <ion-input [(ngModel)]="informacoesUsuario.capitulo"></ion-input>
+        </div>
+        <ion-fab-button (click)="login()">
+          <ion-icon name="play"></ion-icon>
+        </ion-fab-button>
+      </div>
+      <div class="form-opcoes">
+        <ion-button fill="clear" *ngIf="!isCadastro" (click)="isCadastro = true">
+          <ion-icon name="person-circle" slot="start"></ion-icon>
+          Cadastre-se
+        </ion-button>
+        <ion-button fill="clear" *ngIf="isCadastro" (click)="isCadastro = false">
+          <ion-icon name="arrow-back" slot="start"></ion-icon>
+          Voltar para login
+        </ion-button>
+      </div>
+      <ion-text class="creditos">
+        <span>Feito por Demolays para Demolays</span>
+        <small>Desenvolvimento: Breno Freire</small>
+        <small>Design: Pedro Franco</small>
+        <small>Idealização: Filipe Carvalho e Rafael Pessoa</small>
+      </ion-text>
+    </div>
+  </section>
 </ion-content>

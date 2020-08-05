@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './NgRx/reducers';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,8 @@ import { reducers, metaReducers } from './NgRx/reducers';
     IonicModule.forRoot(), 
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
