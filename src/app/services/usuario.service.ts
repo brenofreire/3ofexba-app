@@ -34,6 +34,14 @@ export class UsuarioService {
     }
   }
 
+  public async cadastro(options: { username, password }) {
+    try {
+      await this.apiCtrl.post('cadastro', options)
+    } catch ({error}) {
+      throw error
+    }
+  }
+
   public async salvarInformacoesUsuarioStorage (options: { usuario, token }) {
     await this.storage.set('usuario', options.usuario)
     await this.storage.set('token', options.token)

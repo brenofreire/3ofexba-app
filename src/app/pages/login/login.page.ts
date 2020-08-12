@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginPage implements OnInit {
     private usuarioCtrl: UsuarioService,
     private utilsCtrl: UtilsService,
     private routerCtrl: Router,
+    private alertCtrl: AlertController,
   ) { }
 
   ngOnInit() { }
@@ -24,9 +26,21 @@ export class LoginPage implements OnInit {
       try {
         await this.usuarioCtrl.login(this.informacoesUsuario)
         await this.goTo('home')
+      } catch (error) {        
+        await this.utilsCtrl.mostrarAlert('Houve um erro!', error && error.mensagem || 'Erro ao fazer login, tente novamente mais tarde')
+      }
+    } else {
+      await this.utilsCtrl.mostrarToast('Email inválido')
+    }
+  }
+
+  public async cadastro() {
+    if(this.utilsCtrl.validateEmail(this.informacoesUsuario.email)) {
+      try {
+        await this.usuarioCtrl.cadastro(this.informacoesUsuario)        
+        await this.utilsCtrl.mostrarAlert('Conta criada com sucesso!', 'Aguarde a aprovação da nossa equipe antes de logar')
       } catch (error) {
-        console.log(error)
-        await this.utilsCtrl.mostrarToast(error && error.mensagem || 'Erro ao fazer login, tente novamente mais tarde')
+        await this.utilsCtrl.mostrarAlert('Houve um erro!', error && error.mensagem || 'Erro ao cadastrar, tente novamente mais tarde')
       }
     } else {
       await this.utilsCtrl.mostrarToast('Email inválido')

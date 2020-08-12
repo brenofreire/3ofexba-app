@@ -5,6 +5,7 @@
         <img src="/assets/demolay.png" alt="Desenho de um demolay" />
       </div>
       <div class="form-login-cadastro">
+
         <div class="input-azul">
           <ion-label>Email</ion-label>
           <ion-input [(ngModel)]="informacoesUsuario.email"></ion-input>
@@ -21,9 +22,15 @@
           <ion-label>Número do capítulo</ion-label>
           <ion-input [(ngModel)]="informacoesUsuario.capitulo"></ion-input>
         </div>
-        <ion-fab-button (click)="login()">
-          <ion-icon name="play"></ion-icon>
+
+        <ion-fab-button (click)="login()" *ngIf="!isCadastro">
+          <ion-icon name="play"></ion-icon>          
         </ion-fab-button>
+        <ion-button *ngIf="isCadastro" expand="block" fill="outline" (click)="cadastro()">
+          <ion-icon name="create" *ngIf="isCadastro" slot="start"></ion-icon>
+          <ion-label *ngIf="isCadastro">Cadastrar</ion-label>
+        </ion-button>
+
       </div>
       <div class="form-opcoes">
         <ion-button fill="clear" *ngIf="!isCadastro" (click)="isCadastro = true">

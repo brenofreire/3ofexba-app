@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ export class UtilsService {
   constructor(
     private toastCtrl: ToastController,
     private loaderCtrl: LoadingController,
+    private alertCtrl: AlertController,
   ) { }
  
   public async mostrarToast(message, position?: 'top' | 'bottom') {
@@ -18,13 +19,23 @@ export class UtilsService {
       position: position || 'bottom' 
     })
 
-    return toast.present()
+    return await toast.present()
   }
 
   public async mostrarLoader(message) {
     const loaderCtrl = await this.loaderCtrl.create({ message })
 
     return loaderCtrl
+  }
+
+  public async mostrarAlert(header, subHeader) {
+    const alert = await this.alertCtrl.create({
+      header,
+      subHeader,
+      buttons: ['Ok']
+    })
+
+    return await alert.present()
   }
 
   public validateEmail(email) {
