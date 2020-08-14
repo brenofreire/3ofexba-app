@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { UsuarioService } from './services/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private storage: Storage,
     private routerCtrl: Router,
+    private usuarioCtrl: UsuarioService,
   ) {
     this.initializeApp();
   }
@@ -27,9 +29,17 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       const usuarioLogado = await this.storage.get('usuario')
+
       if(!usuarioLogado) {
-        await this.routerCtrl.navigateByUrl('')
+        await this.routerCtrl.navigateByUrl('login')
+      } else {        
+        await this.setUsuarioLogadoRoot(usuarioLogado)
       }
     });
+  }
+  
+  public async setUsuarioLogadoRoot(usuario) {
+    this.usuarioCtrl.setUsuarioLogado(usuario)
+    await this.routerCtrl.navigateByUrl('home')
   }
 }

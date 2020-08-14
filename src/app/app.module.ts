@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './NgRx/reducers';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StoreModule.forRoot(reducers, { metaReducers }),
     HttpClientModule,
     IonicStorageModule.forRoot(),
+    ComponentsModule,
   ],
   providers: [
     StatusBar,

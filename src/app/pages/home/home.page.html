@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <ion-button fill="clear" slot="end">
+    <ion-icon name="exit" slot="start"></ion-icon>
+    <ion-label>Sair</ion-label>
+  </ion-button>
+</ion-toolbar>
 
 <ion-content>
+  <div class="home-page-wrapper">
+    
+    <app-loader *ngIf="!usuarioLogado || !campanhas" texto="Carregando informações de campanhas"></app-loader>
 
+    <ng-template [ngIf]="usuarioLogado && campanhas">
+      <div class="capitulo-info">
+        <h2>Capítulo:</h2>
+        <h1>
+          {{ usuarioLogado.capituloInfo.nome }} Nº {{ usuarioLogado.capituloInfo.numero }}
+        </h1>
+      </div>
+
+      <div class="campanhas">
+        <ng-template ngFor let-campanha [ngForOf]="campanhas">
+          <app-campanha-item [campanha]="campanha"></app-campanha-item>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
 </ion-content>

@@ -31,6 +31,15 @@
 }
 
 ion-content {
-    --background: #303030;
+    --background: var(--ion-color-background-content);
     --color: #fff;
+}
+ion-toolbar {
+    --background: var(--ion-color-background-content);
+    --border-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 400;
 }

@@ -1,0 +1,18 @@
+.home-page-wrapper {
+  width: calc(100% - 32px);
+  margin: 0 auto;
+  .capitulo-info {
+    text-align: center;
+    h1 {
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+
+  .campanhas {
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    padding: 24px 0;   
+  }
+}

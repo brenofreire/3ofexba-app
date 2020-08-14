@@ -22,12 +22,18 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   public async login() {
+    
     if(this.utilsCtrl.validateEmail(this.informacoesUsuario.email)) {
+      const loader = await this.utilsCtrl.mostrarLoader('Verificando credenciais...')
+      await loader.present()
+
       try {
         await this.usuarioCtrl.login(this.informacoesUsuario)
         await this.goTo('home')
       } catch (error) {        
         await this.utilsCtrl.mostrarAlert('Houve um erro!', error && error.mensagem || 'Erro ao fazer login, tente novamente mais tarde')
+      } finally {
+        await loader.dismiss()
       }
     } else {
       await this.utilsCtrl.mostrarToast('Email inválido')

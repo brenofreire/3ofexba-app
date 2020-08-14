@@ -1,0 +1,9 @@
+<div class="campanhas-item">
+  <div class="barras">
+    <div class="barra barra-auxiliar"></div>
+    <div class="barra barra-progresso" 
+      [style]="toWidth(campanha.concluidas, campanha.ativas)"></div>
+    <div class="barra nome-campanha">{{ campanha.nome }}</div>
+  </div>
+  <span class="campanha-fracao">{{ campanha.concluidas }}/{{ campanha.ativas }}</span>
+</div>
