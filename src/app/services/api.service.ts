@@ -26,7 +26,7 @@ export class ApiService {
       this.http.post(CURRENT_URL_API + url, body, { headers: headersOptions })
         .subscribe(result => { response(result) },
         async (err) => {
-          if (err && err.error && this.JWTRefreshedToken == err.error.mensagem) {
+          if (err && err.error && this.JWTRefreshedToken == err.error.error) {
             await this.relogar(err.error.token)
             response(await this.post(url, body, err.error.token))
           } else {
@@ -44,7 +44,7 @@ export class ApiService {
       this.http.get(CURRENT_URL_API + url, { headers: headerOptions })
         .subscribe(result => response(result),
         async (err) => {
-          if (err && err.error && this.JWTRefreshedToken == err.error.mensagem) {
+          if (err && err.error && this.JWTRefreshedToken == err.error.error) {
             await this.relogar(err.error.token)
             response(await this.get(url, err.error.token))
           } else {

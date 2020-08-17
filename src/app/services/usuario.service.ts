@@ -29,6 +29,8 @@ export class UsuarioService {
     try {
       const info = await this.apiCtrl.post('login', options)
       await this.salvarInformacoesUsuarioStorage(info)
+
+      return info.usuario
     } catch ({error}) {
       throw error
     }
@@ -46,5 +48,15 @@ export class UsuarioService {
     await this.storage.set('usuario', options.usuario)
     await this.storage.set('token', options.token)
     this.setUsuarioLogado(options.usuario)
+  }
+
+  public getHomeRoute (role: 'comun' | 'regional' | 'admin') {
+    const rotasUsuarios = {
+      comum: 'home',
+      regional: 'home-regional',
+      admin: 'home-admin',
+    }
+
+    return rotasUsuarios[role]
   }
 }

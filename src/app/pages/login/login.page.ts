@@ -28,9 +28,11 @@ export class LoginPage implements OnInit {
       await loader.present()
 
       try {
-        await this.usuarioCtrl.login(this.informacoesUsuario)
-        await this.goTo('home')
-      } catch (error) {        
+        const usuario = await this.usuarioCtrl.login(this.informacoesUsuario)
+        
+        await this.goTo(this.usuarioCtrl.getHomeRoute(usuario.role))
+
+      } catch (error) {
         await this.utilsCtrl.mostrarAlert('Houve um erro!', error && error.mensagem || 'Erro ao fazer login, tente novamente mais tarde')
       } finally {
         await loader.dismiss()

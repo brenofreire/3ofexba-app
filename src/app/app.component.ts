@@ -31,7 +31,7 @@ export class AppComponent {
       const usuarioLogado = await this.storage.get('usuario')
 
       if(!usuarioLogado) {
-        await this.routerCtrl.navigateByUrl('login')
+        await this.routerCtrl.navigateByUrl('')
       } else {        
         await this.setUsuarioLogadoRoot(usuarioLogado)
       }
@@ -40,6 +40,7 @@ export class AppComponent {
   
   public async setUsuarioLogadoRoot(usuario) {
     this.usuarioCtrl.setUsuarioLogado(usuario)
-    await this.routerCtrl.navigateByUrl('home')
+    const homeRoute = this.usuarioCtrl.getHomeRoute(usuario.role)
+    await this.routerCtrl.navigateByUrl(homeRoute)
   }
 }
