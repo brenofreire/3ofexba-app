@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
     `
   }
 
-  public logout() {
-    this.usuarioCtrl.logout()
+  public async logout() {
+    await this.usuarioCtrl.logout()
   }
 }
