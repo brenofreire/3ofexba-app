@@ -34,4 +34,22 @@ export class HomePage implements OnInit {
       await this.utilsCtrl.mostrarToast(error)
     }
   }
+
+  public toMeuCargo() {    
+    const cargos = {
+      mc: 'Mestre Conselheiro',
+      esc: 'Escrivão',
+      tes: 'Tesoureiro',
+      hos: 'Hospitaleiro',
+    }
+
+    return `
+      E aí meu <b>${cargos[this.usuarioLogado.cargo]}</b>, tudo certo?
+      Se liga só no resumo das atividades do seu capítulo!
+    `
+  }
+
+  public logout() {
+    this.usuarioCtrl.logout()
+  }
 }

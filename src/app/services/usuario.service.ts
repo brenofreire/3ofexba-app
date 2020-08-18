@@ -5,6 +5,8 @@ import * as UsuarioActions from '../NgRx/actions/usuario.action'
 import { State, getUsuarioLogado } from '../NgRx/reducers'
 import { ApiService } from './api.service';
 import { Storage } from '@ionic/storage';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,10 @@ export class UsuarioService {
 
   constructor(
     private store: Store<State>,
-    public apiCtrl: ApiService,
-    public storage: Storage,
+    private apiCtrl: ApiService,
+    private storage: Storage,
+    private alertCtrl: AlertController,
+    private routerCtrl: Router,
   ) { }
 
   public getUsuariologadoObservable(): Observable<any> {
@@ -58,5 +62,27 @@ export class UsuarioService {
     }
 
     return rotasUsuarios[role]
+  }
+
+  public async logout() {
+    const logoutAlert = await this.alertCtrl.create({
+      header: 'Você está prestes sair da conta',
+      subHeader: 'Tem certeza disso?',
+      buttons: ['Cancelar', {
+          text: 'Sair da conta',
+          handler: async () => {
+            await this.removerInformacoesUsuarioStorage()
+            await this.routerCtrl.navigateByUrl('')
+          }
+        }
+      ]
+    })
+
+    return await logoutAlert.present()
+  }
+
+  public async removerInformacoesUsuarioStorage () {
+    await this.storage.clear()
+    this.setUsuarioLogado(null)
   }
 }
