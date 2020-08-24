@@ -16,9 +16,12 @@
       font-weight: 600;
     }
   }
-
   .campanhas {
     margin: 0 auto;
     padding: 24px 0;   
+  }
+  .botoes-acao {
+    display: flex;
+    justify-content: space-around;
   }
 }

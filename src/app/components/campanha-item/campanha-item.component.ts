@@ -29,10 +29,8 @@ export class CampanhaItemComponent implements OnInit {
   }
 
   toMinhaCampanha() {
-    console.log(this.campanha.cargoTarefa, this.usuarioLogado);
-    
     if(this.campanha.cargoTarefa.includes(this.usuarioLogado.cargo)) {
-      return ' - Sua campanha'
+      return true
     }
   }
 }
