@@ -27,8 +27,15 @@
       </div>
 
       <div class="botoes-acao">
-        <app-button-demolay icon="demolay" texto="Carluxo" tamanho="80"></app-button-demolay>
-        <app-button-demolay icon="acompanhamento" texto="Acompanhamento" tamanho="80"></app-button-demolay>
+        <app-button-demolay 
+          icon="demolay" texto="Arauto" tamanho="80"
+          (click)="abrirModal('arauto')">
+
+        </app-button-demolay>
+        <app-button-demolay 
+          icon="acompanhamento" texto="Acompanhamento" tamanho="80"
+          (click)="abrirModal('acompanhamento')">
+        </app-button-demolay>
       </div>
     </ng-template>
   </div>

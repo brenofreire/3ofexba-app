@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TarefasService } from 'src/app/services/tarefas.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ArautoPage } from '../arauto/arauto.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,7 @@ export class HomePage implements OnInit {
     private usuarioCtrl: UsuarioService,
     private tarefasCtrl: TarefasService,
     private utilsCtrl: UtilsService,
+    private modalCtrl: ModalController,
   ) { }
 
   async ngOnInit() {
@@ -51,5 +54,17 @@ export class HomePage implements OnInit {
 
   public async logout() {
     await this.usuarioCtrl.logout()
+  }
+
+  public async abrirModal(modalName) {
+    const modalOptions = {
+      arauto: ArautoPage,
+    }
+
+    const modal = await this.modalCtrl.create({
+      component: modalOptions[modalName]
+    })
+
+    await modal.present()
   }
 }

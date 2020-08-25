@@ -20,6 +20,10 @@ const routes: Routes = [
   },  {
     path: 'home-regional',
     loadChildren: () => import('./pages/home-regional/home-regional.module').then( m => m.HomeRegionalPageModule)
+  },
+  {
+    path: 'arauto',
+    loadChildren: () => import('./pages/arauto/arauto.module').then( m => m.ArautoPageModule)
   }
 
 ];
