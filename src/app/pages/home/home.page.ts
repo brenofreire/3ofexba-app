@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TarefasService } from 'src/app/services/tarefas.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { ArautoPage } from '../arauto/arauto.page';
 import { ModalController } from '@ionic/angular';
+import { AgostinhoPage } from '../agostinho/agostinho.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage implements OnInit {
     private usuarioCtrl: UsuarioService,
     private tarefasCtrl: TarefasService,
     private utilsCtrl: UtilsService,
-    private modalCtrl: ModalController,
+    private routerCtrl: Router,
   ) { }
 
   async ngOnInit() {
@@ -56,15 +57,7 @@ export class HomePage implements OnInit {
     await this.usuarioCtrl.logout()
   }
 
-  public async abrirModal(modalName) {
-    const modalOptions = {
-      arauto: ArautoPage,
-    }
-
-    const modal = await this.modalCtrl.create({
-      component: modalOptions[modalName]
-    })
-
-    await modal.present()
+  public async abrirPage(modalName) {
+    await this.routerCtrl.navigateByUrl(modalName)
   }
 }

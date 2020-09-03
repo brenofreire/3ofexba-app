@@ -1,0 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{ tituloTarefa }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-template [ngIf]="!carregandoTarefas">
+    A
+    <ng-template ngFor let-tarefa [ngForOf]="tarefas">
+      <div class="tarefa-item">
+        <span class="tarefa-title">{{ tarefa.nome }}</span>
+        <div class="tarefa-info">
+
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</ion-content>

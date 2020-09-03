@@ -22,4 +22,14 @@ export class TarefasService {
       throw error
     }
   }
+
+  public async getTarefas(options?: { nomeTarefa }) {
+    try {
+      const tarefas = await this.apiCtrl.get(`campanhas/${options.nomeTarefa}`)
+
+      return tarefas
+    } catch ({error}) {
+      throw error
+    }
+  }
 }

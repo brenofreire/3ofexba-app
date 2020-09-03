@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ArautoPageRoutingModule } from './arauto-routing.module';
+import { TarefasPageRoutingModule } from './tarefas-routing.module';
 
-import { ArautoPage } from './arauto.page';
+import { TarefasPage } from './tarefas.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ArautoPageRoutingModule
+    TarefasPageRoutingModule
   ],
-  declarations: [ArautoPage]
+  declarations: [TarefasPage]
 })
-export class ArautoPageModule {}
+export class TarefasPageModule {}

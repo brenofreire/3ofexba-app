@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
+  },
+  {
+    path: 'campanha',
+    loadChildren: () => import('./tarefas/tarefas-routing.module').then( m => m.TarefasPageRoutingModule)
+  },
+  {
+    path: 'tarefas',
+    loadChildren: () => import('./tarefas/tarefas.module').then( m => m.TarefasPageModule)
   }
 ];
 

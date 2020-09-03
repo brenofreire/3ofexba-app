@@ -56,7 +56,7 @@ export class ApiService {
   }
 
   async montarHeader(tipoRequest, tokenNovo?) {
-    const token = tokenNovo || await this.storage.get('token')
+    const token = tokenNovo || await this.storage.get('usuario-token')
     const tokenFormatado = `Bearer ${token}`
 
     const headersOptions = {

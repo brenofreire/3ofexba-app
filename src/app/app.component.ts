@@ -39,8 +39,6 @@ export class AppComponent {
   }
   
   public async setUsuarioLogadoRoot(usuario) {
-    this.usuarioCtrl.setUsuarioLogado(usuario)
-    const homeRoute = this.usuarioCtrl.getHomeRoute(usuario.role)
-    await this.routerCtrl.navigateByUrl(homeRoute)
+    this.usuarioCtrl.setUsuarioLogado(usuario)    
   }
 }

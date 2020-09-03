@@ -8,24 +8,33 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),        
+      },
+      {
+        path: 'campanha/:tipoCampanha',
+        loadChildren: () => import('./pages/home/tarefas/tarefas-routing.module').then(m => m.TarefasPageRoutingModule)
+      }
+    ]
   },
   {
     path: 'home-admin',
-    loadChildren: () => import('./pages/home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
-  },  {
-    path: 'home-regional',
-    loadChildren: () => import('./pages/home-regional/home-regional.module').then( m => m.HomeRegionalPageModule)
+    loadChildren: () => import('./pages/home-admin/home-admin.module').then(m => m.HomeAdminPageModule)
   },
   {
-    path: 'arauto',
-    loadChildren: () => import('./pages/arauto/arauto.module').then( m => m.ArautoPageModule)
-  }
-
+    path: 'home-regional',
+    loadChildren: () => import('./pages/home-regional/home-regional.module').then(m => m.HomeRegionalPageModule)
+  },
+  {
+    path: 'agostinho',
+    loadChildren: () => import('./pages/agostinho/agostinho.module').then(m => m.AgostinhoPageModule)
+  },
 ];
 @NgModule({
   imports: [
@@ -33,4 +42,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

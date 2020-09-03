@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campanha-item',
@@ -13,6 +14,7 @@ export class CampanhaItemComponent implements OnInit {
 
   constructor(
     private usuarioCtrl: UsuarioService,
+    private routerCtrl: Router,
   ) { }
 
   ngOnInit() { 
@@ -32,5 +34,9 @@ export class CampanhaItemComponent implements OnInit {
     if(this.campanha.cargoTarefa.includes(this.usuarioLogado.cargo)) {
       return true
     }
+  }
+
+  async abrirCamapnha() {
+    await this.routerCtrl.navigateByUrl(`home/campanha/${this.campanha.slug}`)
   }
 }

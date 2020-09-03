@@ -3,6 +3,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,16 @@ export class LoginPage implements OnInit {
     private usuarioCtrl: UsuarioService,
     private utilsCtrl: UtilsService,
     private routerCtrl: Router,
-    private alertCtrl: AlertController,
+    private storage: Storage,
   ) { }
 
-  ngOnInit() { }
+  async ngOnInit() { 
+    const usuarioLogado = await this.storage.get('usuario')
+    const homeRoute = this.usuarioCtrl.getHomeRoute(usuarioLogado.role)
+    await this.routerCtrl.navigateByUrl(homeRoute)
+  }
 
-  public async login() {
-    
+  public async login() {    
     if(this.utilsCtrl.validateEmail(this.informacoesUsuario.email)) {
       const loader = await this.utilsCtrl.mostrarLoader('Verificando credenciais...')
       await loader.present()
