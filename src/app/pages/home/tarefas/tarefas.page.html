@@ -1,19 +1,22 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{ tituloTarefa }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ng-template [ngIf]="!carregandoTarefas">
-    A
-    <ng-template ngFor let-tarefa [ngForOf]="tarefas">
-      <div class="tarefa-item">
-        <span class="tarefa-title">{{ tarefa.nome }}</span>
-        <div class="tarefa-info">
-
-        </div>
+  <ng-template ngFor let-tarefa [ngForOf]="tarefas">
+    <div class="tarefa-item">
+      <div class="tarefa-title">{{ tarefa.nome }}</div>
+      <div class="tarefa-info">
+        <span>
+          <ion-icon name="information-circle-outline" size="small"></ion-icon>
+          {{ tarefa.statusCapituloLabel }}
+        </span>
       </div>
-    </ng-template>
+    </div>
   </ng-template>
 </ion-content>

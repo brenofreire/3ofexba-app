@@ -8,10 +8,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tarefas.page.scss'],
 })
 export class TarefasPage implements OnInit {
-  public tarefas: any[]
-  public slugTarefa: string
-  public tituloTarefa: string
   public carregandoTarefas: boolean = true
+  public slugTarefa: string
+  public tituloTarefa: any
+  public tarefas: any
 
   constructor(
     private tarefasCtrl: TarefasService,
@@ -19,7 +19,7 @@ export class TarefasPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.route.paramMap.subscribe(params => {      
+    this.route.paramMap.subscribe(params => {
       this.slugTarefa = params.get('tipoCampanha')
     })
 
@@ -27,6 +27,7 @@ export class TarefasPage implements OnInit {
   }
 
   async getTarefas() {
+    this.carregandoTarefas = true
     try {
       const { tarefas, tituloTarefa } = await this.tarefasCtrl.getTarefas({
         nomeTarefa: this.slugTarefa
@@ -42,4 +43,5 @@ export class TarefasPage implements OnInit {
       this.carregandoTarefas = false
     }
   }
+
 }

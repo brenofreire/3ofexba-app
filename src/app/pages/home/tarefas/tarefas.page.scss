@@ -1,0 +1,22 @@
+.tarefa-item {
+    width: calc(100% - 32px);
+    padding: 12px 16px;
+    margin: 8px auto;
+    background-color: #666;
+    border-radius: 8px;
+    border-left: 8px solid #999;    
+    .tarefa-title {
+        margin-bottom: 4px;
+    }
+    .tarefa-info {
+        span {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-size: 12px;
+            ion-icon {
+                margin-right: 4px;
+            }
+        }
+    }
+}

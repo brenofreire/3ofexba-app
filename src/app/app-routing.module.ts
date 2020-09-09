@@ -12,16 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),        
-      },
-      {
-        path: 'campanha/:tipoCampanha',
-        loadChildren: () => import('./pages/home/tarefas/tarefas-routing.module').then(m => m.TarefasPageRoutingModule)
-      }
-    ]
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
   },
   {
     path: 'home-admin',
