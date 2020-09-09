@@ -9,14 +9,6 @@
 
 <ion-content>
   <ng-template ngFor let-tarefa [ngForOf]="tarefas">
-    <div class="tarefa-item">
-      <div class="tarefa-title">{{ tarefa.nome }}</div>
-      <div class="tarefa-info">
-        <span>
-          <ion-icon name="information-circle-outline" size="small"></ion-icon>
-          {{ tarefa.statusCapituloLabel }}
-        </span>
-      </div>
-    </div>
+    <tarefa-item [tarefa]="tarefa"></tarefa-item>
   </ng-template>
 </ion-content>

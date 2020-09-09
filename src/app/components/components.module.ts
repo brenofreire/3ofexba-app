@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CampanhaItemComponent } from './campanha-item/campanha-item.component';
 import { ButtonDemolayComponent } from './button-demolay/button-demolay.component';
+import { TarefaItemComponent } from './tarefa-item/tarefa-item.component';
 
 
 
@@ -13,11 +14,13 @@ import { ButtonDemolayComponent } from './button-demolay/button-demolay.componen
     LoaderComponent, 
     CampanhaItemComponent,
     ButtonDemolayComponent,
+    TarefaItemComponent,
   ],
   entryComponents: [
     LoaderComponent, 
     CampanhaItemComponent,
     ButtonDemolayComponent,
+    TarefaItemComponent,
   ],
   imports: [
     FormsModule,
@@ -28,6 +31,7 @@ import { ButtonDemolayComponent } from './button-demolay/button-demolay.componen
     LoaderComponent, 
     CampanhaItemComponent,
     ButtonDemolayComponent,
+    TarefaItemComponent,
   ]
 })
 export class ComponentsModule { }
