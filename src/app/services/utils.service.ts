@@ -16,7 +16,7 @@ export class UtilsService {
     const toast = await this.toastCtrl.create({ 
       message, 
       duration: 3000, 
-      position: position || 'bottom' 
+      position: position || 'top' 
     })
 
     return await toast.present()

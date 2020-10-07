@@ -50,7 +50,7 @@ export class UsuarioService {
 
   public async salvarInformacoesUsuarioStorage (options: { usuario, token }) {
     await this.storage.set('usuario', options.usuario)
-    await this.storage.set('token', options.token)
+    await this.storage.set('usuario-token', options.token)
     this.setUsuarioLogado(options.usuario)
   }
 

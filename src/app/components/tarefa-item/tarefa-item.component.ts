@@ -8,8 +8,9 @@ import { TarefasService } from 'src/app/services/tarefas.service';
   styleUrls: ['./tarefa-item.component.scss'],
 })
 export class TarefaItemComponent implements OnInit {
-  @Input('tarefa') tarefa: any
-  public usuario: any;
+  @Input('tarefa') tarefaAux: any
+  public tarefa: any
+  public usuario: any
 
   constructor(
     private usuarioCtrl: UsuarioService,
@@ -20,10 +21,20 @@ export class TarefaItemComponent implements OnInit {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(item => {
       this.usuario = item
     })
+
+    this.tarefa = this.tarefaAux
   }
 
   async abrirMudarStatusTarefa() {
-    // Adicionar verificação de role para MC ... ESC ...
-    await this.tarefasCtrl.actionSheetStatusTarefa({ tarefa: this.tarefa })
+    try {
+      const novoStatus = await this.tarefasCtrl.actionSheetStatusTarefa({
+        tarefa: this.tarefa,
+        cargo: this.usuario.cargo
+      })
+
+      await novoStatus.present()
+    } catch (error) {
+      throw error
+    }
   }
 }

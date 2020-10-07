@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() { 
     const usuarioLogado = await this.storage.get('usuario')
-    const homeRoute = this.usuarioCtrl.getHomeRoute(usuarioLogado.role)
+    const homeRoute = usuarioLogado && this.usuarioCtrl.getHomeRoute(usuarioLogado.role) || ''
     await this.routerCtrl.navigateByUrl(homeRoute)
   }
 
