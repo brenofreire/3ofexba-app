@@ -35,8 +35,6 @@ export class TarefasPage implements OnInit {
 
       this.tituloTarefa = tituloTarefa
       this.tarefas = tarefas
-
-      console.log(this.tarefas)
     } catch (error) {
       console.log(error)
     } finally {

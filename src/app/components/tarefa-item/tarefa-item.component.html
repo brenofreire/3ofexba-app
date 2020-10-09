@@ -1,7 +1,7 @@
-<div class="tarefa-item" (click)="abrirMudarStatusTarefa()">
+<div class="tarefa-item" (click)="abrirMudarStatusTarefa()" [class]="tarefa.statusCapituloSlug">
   <div class="tarefa-title">{{ tarefa.nome }}</div>
   <div class="tarefa-info">
-    <span>
+    <span [class]="tarefa.statusCapituloSlug">
       <ion-icon name="information-circle-outline" size="small"></ion-icon>
       {{ tarefa.statusCapituloLabel }}
     </span>

@@ -54,8 +54,8 @@ export class TarefasService {
         handler: async () => {
           this.tarefa = options.tarefa          
           const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)          
-          
-          if (cargosPermitidosParaEditar.includes(options.cargo)) {
+
+          if (cargosPermitidosParaEditar.includes(options.cargo) && this.usuario.role !== 'admin') {
             return await this.alertMudarStatus({ tarefa: this.tarefa })
           } else {
             return await this.utilsCtrl.mostrarToast('Você não tem permissão de alterar o status desta atividade!')

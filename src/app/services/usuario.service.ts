@@ -85,4 +85,15 @@ export class UsuarioService {
     await this.storage.clear()
     this.setUsuarioLogado(null)
   }
+
+  public toMeuCargo(options: { usuarioLogado }) {    
+    const cargos = {
+      mc: 'Mestre Conselheiro',
+      esc: 'Escrivão',
+      tes: 'Tesoureiro',
+      hos: 'Hospitaleiro',
+    }
+
+    return cargos[options.usuarioLogado.cargo]
+  }
 }

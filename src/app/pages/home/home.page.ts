@@ -40,15 +40,10 @@ export class HomePage implements OnInit {
   }
 
   public toMeuCargo() {    
-    const cargos = {
-      mc: 'Mestre Conselheiro',
-      esc: 'Escrivão',
-      tes: 'Tesoureiro',
-      hos: 'Hospitaleiro',
-    }
+    const meuCargo = this.usuarioCtrl.toMeuCargo({ usuarioLogado: this.usuarioLogado })
 
     return `
-      E aí meu <b>${cargos[this.usuarioLogado.cargo]}</b>, tudo certo?
+      E aí meu <b>${meuCargo}</b>, tudo certo?
       Se liga só no resumo das atividades do seu capítulo!
     `
   }
