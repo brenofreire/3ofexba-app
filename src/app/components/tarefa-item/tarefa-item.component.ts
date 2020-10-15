@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TarefasService } from 'src/app/services/tarefas.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'tarefa-item',
@@ -15,6 +16,7 @@ export class TarefaItemComponent implements OnInit {
   constructor(
     private usuarioCtrl: UsuarioService,
     private tarefasCtrl: TarefasService,
+    private utilsCtrl: UtilsService,
   ) { }
 
   ngOnInit() {

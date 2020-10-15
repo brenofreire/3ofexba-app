@@ -53,6 +53,11 @@ export class TarefasService {
         text: 'Mudar status da atividade',
         handler: async () => {
           this.tarefa = options.tarefa          
+          
+          if(this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {      
+            return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
+          }
+
           const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)          
 
           if (cargosPermitidosParaEditar.includes(options.cargo) && this.usuario.role !== 'admin') {

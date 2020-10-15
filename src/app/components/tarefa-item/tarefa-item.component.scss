@@ -18,10 +18,10 @@
         border-left-color: #d5e1f6;
     }
     &.atividade-devolvida {
-        border-left-color: #fbd4dc;
+        border-left-color: #dbdbdb;
     }
     &.atividade-recusada {
-        border-left-color: #dbdbdb;
+        border-left-color: #fbd4dc;
     }
     &.atividade-aprovada {
         border-left-color: #e3ffe5;
@@ -58,13 +58,13 @@
                 background-color: #d5e1f6;
                 color: #2a4270;
             }
-            &.atividade-devolvida {
-                background-color: #fbd4dc;
-                color: #dc143c;
-            }
-            &.atividade-recusada {
+            &.atividade-devolvida {                
                 background-color: #dbdbdb;
                 color: #000000;
+            }
+            &.atividade-recusada {
+                background-color: #fbd4dc;
+                color: #dc143c;
             }
             &.atividade-aprovada {
                 background-color: #e3ffe5;
