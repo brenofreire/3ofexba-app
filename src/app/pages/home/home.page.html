@@ -1,16 +1,18 @@
-<ion-toolbar>
-  <ion-button fill="clear" slot="end" (click)="logout()">
-    <ion-icon name="exit" slot="start"></ion-icon>
-    <ion-label>Sair</ion-label>
-  </ion-button>
-</ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button fill="clear" slot="end" (click)="logout()">
+      <ion-icon name="exit" slot="start"></ion-icon>
+      <ion-label>Sair</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-  <div class="home-page-wrapper">
-    
-    <app-loader *ngIf="!usuarioLogado || !campanhas" texto="Carregando informações de campanhas"></app-loader>
+  <app-content>
 
-    <p class="pseudo-title" [innerHTML]="toMeuCargo()"></p>
+    <app-loader *ngIf="!usuarioLogado || !campanhas" texto="Carregando informações de campanhas..."></app-loader>
+
+    <pseudo-title" [innerHTML]="toMeuCargo()"></pseudo-title>
 
     <ng-template [ngIf]="usuarioLogado && campanhas">
       <div class="capitulo-info">
@@ -26,17 +28,15 @@
         </ng-template>
       </div>
 
-      <div class="botoes-acao">
-        <app-button-demolay 
-          icon="demolay" texto="Agostinho" tamanho="80"
-          (click)="abrirPage('agostinho')">
+      <app-botoes-acao>
+        <app-button-demolay icon="demolay" texto="Agostinho" tamanho="80" (click)="abrirPage('agostinho')">
         </app-button-demolay>
-        
-        <app-button-demolay 
-          icon="acompanhamento" texto="Acompanhamento" tamanho="80"
+
+        <app-button-demolay icon="acompanhamento" texto="Acompanhamento" tamanho="80"
           (click)="abrirPage('acompanhamento')">
         </app-button-demolay>
-      </div>
+      </app-botoes-acao>
+
     </ng-template>
-  </div>
+  </app-content>
 </ion-content>

@@ -1,9 +1,42 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>HomeAdmin</ion-title>
+    <ion-button fill="clear" slot="end" (click)="logout()">
+      <ion-icon name="exit" slot="start"></ion-icon>
+      <ion-label>Sair</ion-label>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <app-content>
 
+    <app-loader *ngIf="!usuarioLogado" texto="Carregando informações de admin..."></app-loader>
+
+    <app-pseudo-title>
+      Salve meu <b>admin</b>! Se liga só que é hora de trabalhar, escolha a região que quer manusear ;)
+    </app-pseudo-title>
+
+    <ng-template [ngIf]="usuarioLogado">
+      <!-- <div class="capitulo-info">
+        <h2>Capítulo:</h2>
+        <h1>
+          {{ usuarioLogado.capituloInfo.nome }} Nº {{ usuarioLogado.capituloInfo.numero }}
+        </h1>
+      </div> -->
+
+      <div class="seletor-inicial">
+        Conteúdo
+      </div>
+
+      <app-botoes-acao>
+        <app-button-demolay icon="demolay" texto="Configurações" tamanho="80" (click)="abrirPage('agostinho')">
+        </app-button-demolay>
+
+        <app-button-demolay icon="acompanhamento" texto="Postar" tamanho="80"
+          (click)="abrirPage('acompanhamento')">
+        </app-button-demolay>
+      </app-botoes-acao>
+
+    </ng-template>
+  </app-content>
 </ion-content>

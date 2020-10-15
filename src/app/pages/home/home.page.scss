@@ -1,4 +1,4 @@
-.home-page-wrapper {
+app-content {
   width: calc(100% - 64px);
   margin: 0 auto;
   > * {
@@ -19,9 +19,5 @@
   .campanhas {
     margin: 0 auto;
     padding: 24px 0;   
-  }
-  .botoes-acao {
-    display: flex;
-    justify-content: space-around;
-  }
+  }  
 }
