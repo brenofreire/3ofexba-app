@@ -46,8 +46,8 @@ export class TarefasService {
     }
   }
 
-  public async actionSheetStatusTarefa(options: { tarefa, cargo?}) {
-    return await this.actionSheetCtrl.create({
+  public async actionSheetStatusTarefa(options: { tarefa, cargo? }) {
+    const actionSheet = await this.actionSheetCtrl.create({
       header: 'O que deseja fazer?',
       buttons: [{
         text: 'Mudar status da atividade',
@@ -56,7 +56,23 @@ export class TarefasService {
           const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)          
 
           if (cargosPermitidosParaEditar.includes(options.cargo) && this.usuario.role !== 'admin') {
-            return await this.alertMudarStatus({ tarefa: this.tarefa })
+            const alertMudarStatus = await this.alertMudarStatus({ tarefa: this.tarefa })
+
+            await alertMudarStatus.present()
+
+            const { data } = await alertMudarStatus.onDidDismiss()
+        
+            if (data) {
+              options.tarefa.status = data.value
+        
+              await this.mudarStatus(options)
+        
+              await actionSheet.dismiss({
+                statusSlug: data.value,
+                statusNome: data.label,
+                statusCapitulo: data.statusCapitulo
+              })
+            }
           } else {
             return await this.utilsCtrl.mostrarToast('Você não tem permissão de alterar o status desta atividade!')
           }
@@ -71,6 +87,7 @@ export class TarefasService {
         role: 'cancel'
       }]
     })
+    return actionSheet
   }
 
   public async alertMudarStatus(options: { tarefa: any }) {
@@ -83,54 +100,56 @@ export class TarefasService {
         label: 'Atividade não formulada',
         value: 'atividade-nao-formulada',
         checked: this.tarefa.statusCapitulo === 0,
-        handler: async (data) => await alertMudarStatus.dismiss(data)
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 0 
+        })
       }, {
         type: 'radio',
         label: 'Atividade realizada',
         value: 'atividade-realizada',
         checked: this.tarefa.statusCapitulo === 1,
-        handler: async (data) => await alertMudarStatus.dismiss(data)
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 1,
+        })
       }, {
         type: 'radio',
         label: 'Atividade enviada',
         value: 'atividade-enviada',
         checked: this.tarefa.statusCapitulo === 2,
-        handler: async (data) => await alertMudarStatus.dismiss(data)
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 2,
+        })
       }, {
         type: 'radio',
         label: 'Atividade devolvida',
         value: 'atividade-devolvida',
         checked: this.tarefa.statusCapitulo === 3,
         disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss(data)
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 3
+        })
       }, {
         type: 'radio',
         label: 'Atividade recusada',
         value: 'atividade-recusada',
         checked: this.tarefa.statusCapitulo === 4,
         disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss(data)
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 4
+        })
       }, {
         type: 'radio',
         label: 'Atividade aprovada',
         value: 'atividade-aprovada',
         checked: this.tarefa.statusCapitulo === 5,
         disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss(data)
-      },]
+        handler: async (data) => await alertMudarStatus.dismiss({
+          ...data, statusCapitulo: 5
+        })
+      }]
     })
 
-    await alertMudarStatus.present()
-
-    const { data } = await alertMudarStatus.onDidDismiss()
-
-    if (data) {
-      options.tarefa.status = data.value
-
-      await this.mudarStatus(options)
-
-      return options.tarefa.status
-    }
+    return alertMudarStatus
   }
 
   public async mudarStatus(options: { tarefa }) {

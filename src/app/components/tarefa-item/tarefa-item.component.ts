@@ -33,6 +33,14 @@ export class TarefaItemComponent implements OnInit {
       })
 
       await novoStatus.present()
+
+      const { data: situacaoDoCapituloNaAtividade } = await novoStatus.onDidDismiss()
+
+      if(situacaoDoCapituloNaAtividade) {
+        this.tarefa.statusCapituloSlug = situacaoDoCapituloNaAtividade.statusSlug 
+        this.tarefa.statusCapituloLabel = situacaoDoCapituloNaAtividade.statusNome 
+        this.tarefa.statusCapitulo = situacaoDoCapituloNaAtividade.statusCapitulo 
+      }
     } catch (error) {
       throw error
     }
