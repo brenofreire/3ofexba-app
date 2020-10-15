@@ -1,0 +1,23 @@
+app-content {
+    .seletor-inicial {
+        padding-bottom: 120px;
+        .item-acao {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            text-align: center;
+            .item-icone {
+                font-size: 32px;
+                padding-right: 12px;
+                ion-icon {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    app-botoes-acao {
+        margin-top: 32px;
+        display: block;
+    }
+}
