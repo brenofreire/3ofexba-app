@@ -1,14 +1,14 @@
 <div class="campanhas-item" (click)="abrirCamapnha()">
-  <div class="barras">
+  <div class="barras" [class.itemSemDescricao]="campanha.isAdmin">
     <div class="barra barra-auxiliar"></div>
     <div class="barra barra-progresso" 
-      [style]="toWidth(campanha.concluidas, campanha.ativas)"></div>
+      [style]="toWidth(campanha.concluidas, campanha.ativas)" *ngIf="!isAdmin"></div>
     <div class="barra nome-campanha">
       <ion-icon name="star" slot="start" color="warning" *ngIf="toMinhaCampanha()"></ion-icon>
       {{ campanha.nome }}      
     </div>
   </div>
-  <span class="campanha-fracao">    
+  <span class="campanha-fracao" *ngIf="campanha.cargoTarefa">    
     {{ campanha.concluidas }}/{{ campanha.ativas }}
   </span>
 </div>

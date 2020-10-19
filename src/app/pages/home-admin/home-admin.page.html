@@ -17,40 +17,44 @@
     </app-pseudo-title>
 
     <ng-template [ngIf]="usuarioLogado">
-      <!-- <div class="capitulo-info">
-        <h2>Capítulo:</h2>
-        <h1>
-          {{ usuarioLogado.capituloInfo.nome }} Nº {{ usuarioLogado.capituloInfo.numero }}
-        </h1>
-      </div> -->
+      <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo...">
+
+      </ion-searchbar>
 
       <div class="seletor-inicial">
         <div class="item-acao">
           <div class=item-icone>
             <ion-icon name="navigate-circle-outline"></ion-icon>
-          </div>          
+          </div>
           <span>Selecionar região</span>
         </div>
 
         <div class="item-acao">
           <div class=item-icone>
             <ion-icon name="person-add-outline"></ion-icon>
-          </div>          
+          </div>
           <span>Aprovar cadastros</span>
         </div>
 
         <div class="item-acao">
           <div class=item-icone>
             <ion-icon name="duplicate-outline"></ion-icon>
-          </div>          
+          </div>
           <span>Adicionar ou editar organização</span>
         </div>
 
-        <div class="item-acao">
+        <div class="item-acao" (click)="abrirCriacaoEdicaoCampanha()">
           <div class=item-icone>
             <ion-icon name="flag-outline"></ion-icon>
-          </div>          
-          <span>Cadastrar campanha</span>
+          </div>
+          <span>Central de campanhas</span>
+        </div>
+
+        <div class="item-acao" (click)="abrirCriacaoEdicaoCampanha()">
+          <div class=item-icone>
+            <ion-icon name="key-outline"></ion-icon>
+          </div>
+          <span>Editar cadastro</span>
         </div>
       </div>
 
@@ -58,8 +62,7 @@
         <app-button-demolay icon="demolay" texto="Configurações" tamanho="80" (click)="abrirPage('agostinho')">
         </app-button-demolay>
 
-        <app-button-demolay icon="acompanhamento" texto="Postar" tamanho="80"
-          (click)="abrirPage('acompanhamento')">
+        <app-button-demolay icon="acompanhamento" texto="Postar" tamanho="80" (click)="abrirPage('acompanhamento')">
         </app-button-demolay>
       </app-botoes-acao>
 

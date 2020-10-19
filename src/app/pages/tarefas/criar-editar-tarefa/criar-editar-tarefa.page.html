@@ -1,0 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Criar ou editar tarefa</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="primary">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-content>
+    <ng-template ngFor let-campanha [ngForOf]="campanhas">
+      <app-campanha-item [campanha]="campanha"></app-campanha-item>
+    </ng-template>
+  </app-content>
+
+</ion-content>

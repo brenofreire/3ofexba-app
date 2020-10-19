@@ -17,7 +17,7 @@ export class CampanhaItemComponent implements OnInit {
     private routerCtrl: Router,
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(item => {
       this.usuarioLogado = item
     })
@@ -31,7 +31,10 @@ export class CampanhaItemComponent implements OnInit {
   }
 
   toMinhaCampanha() {
-    if(this.campanha.cargoTarefa.includes(this.usuarioLogado.cargo)) {
+    if (
+      this.campanha.cargoTarefa &&
+      this.campanha.cargoTarefa.includes(this.usuarioLogado.cargo)
+    ) {
       return true
     }
   }

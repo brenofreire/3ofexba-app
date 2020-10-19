@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page';
 
 @Component({
   selector: 'app-home-admin',
@@ -10,7 +12,8 @@ export class HomeAdminPage implements OnInit {
   public usuarioLogado: any
 
   constructor(
-    private usuarioCtrl: UsuarioService,    
+    private usuarioCtrl: UsuarioService,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -21,4 +24,11 @@ export class HomeAdminPage implements OnInit {
     })
   }
 
+  async abrirCriacaoEdicaoCampanha() {
+    const modalCriacaoEdicaoCamapanha = await this.modalCtrl.create({
+      component: CriarEditarTarefaPage,      
+    })
+
+    return await modalCriacaoEdicaoCamapanha.present()
+  }
 }

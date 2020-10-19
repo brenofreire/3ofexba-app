@@ -190,4 +190,19 @@ export class TarefasService {
       throw error
     }
   }
+
+  public async getCampanhasAdmin(options: { offset, termoBusca }) {
+    try {
+      const url = `campanhas?offset=${options.offset}&termoBusca${options.termoBusca}`
+      const campanhas = await this.apiCtrl.get(url)
+
+      for (const key in campanhas) {
+        campanhas[key].isAdmin = true
+      }
+
+      return campanhas
+    } catch ({ error }) {
+      throw error
+    }
+  }
 }

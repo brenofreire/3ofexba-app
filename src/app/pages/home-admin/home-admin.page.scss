@@ -1,6 +1,5 @@
 app-content {
     .seletor-inicial {
-        padding-bottom: 120px;
         .item-acao {
             display: flex;
             align-items: center;
@@ -19,5 +18,12 @@ app-content {
     app-botoes-acao {
         margin-top: 32px;
         display: block;
+    }
+
+    ion-searchbar {
+        --background: rgba(0, 0, 0, 0.35);
+        --placeholder-color: #fff;
+        --color: #fff;
+        margin-bottom: 12px;
     }
 }

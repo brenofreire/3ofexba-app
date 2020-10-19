@@ -12,7 +12,9 @@
 
     <app-loader *ngIf="!usuarioLogado || !campanhas" texto="Carregando informações de campanhas..."></app-loader>
 
-    <pseudo-title" [innerHTML]="toMeuCargo()"></pseudo-title>
+    <app-pseudo-title> 
+      <p [innerHTML]="toMeuCargo()"></p>
+    </app-pseudo-title>
 
     <ng-template [ngIf]="usuarioLogado && campanhas">
       <div class="capitulo-info">
