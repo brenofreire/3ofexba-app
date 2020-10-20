@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { ApiService } from './api.service';
-import { State } from '../NgRx/reducers'
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { UsuarioService } from './usuario.service';
 import { UtilsService } from './utils.service';
@@ -14,7 +12,6 @@ export class TarefasService {
   private usuario: any
 
   constructor(
-    private store: Store<State>,
     private apiCtrl: ApiService,
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,

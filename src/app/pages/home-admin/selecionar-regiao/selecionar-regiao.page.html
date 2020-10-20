@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Selecionar região</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-content>
+
+    <ng-template [ngIf]="!carregando">
+      <div class="seletores-capitulo">
+
+        <ion-item>
+          <ion-label>Selecione a região</ion-label>
+          <ion-select placeholder="Nenhuma selecionada" (ionChange)="setouRegiaoBuscarCapitulos()"
+            [(ngModel)]="regiaoSelecionada" okText="Ok" cancelText="Cancelar">
+            <ion-select-option *ngFor="let regiao of regioes" [value]="regiao">
+              {{ regiao }}ª Ofex
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </div>
+
+      <div class="capitulos-lista">
+        <ng-template ngFor let-capitulo [ngForOf]="capitulosDaRegiao">
+          <!-- Criar comp -->
+          <div lines="none" class="item-capitulo" (click)="abrirCapituloDetalhado(capitulo)">
+            <h2>{{ capitulo.nome }}</h2>
+            <div class="item-capitulo-info">
+              <span>{{ capitulo.sigla }}</span>
+              <span>{{ capitulo.numero }}º</span>
+            </div>
+          </div>
+
+        </ng-template>
+      </div>
+    </ng-template>
+
+  </app-content>
+
+</ion-content>

@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'criar-editar-tarefa',
     loadChildren: () => import('./pages/tarefas/criar-editar-tarefa/criar-editar-tarefa.module').then( m => m.CriarEditarTarefaPageModule)
   },
+  {
+    path: 'capitulo-single',
+    loadChildren: () => import('./pages/capitulo-single/capitulo-single.module').then( m => m.CapituloSinglePageModule)
+  },
 
 ];
 @NgModule({

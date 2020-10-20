@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page';
+import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page';
 
 @Component({
   selector: 'app-home-admin',
@@ -30,5 +31,17 @@ export class HomeAdminPage implements OnInit {
     })
 
     return await modalCriacaoEdicaoCamapanha.present()
+  }
+
+  async selecionarRegiao() {
+    const modalCriacaoEdicaoCamapanha = await this.modalCtrl.create({
+      component: SelecionarRegiaoPage,
+    })
+
+    return await modalCriacaoEdicaoCamapanha.present()
+  }
+
+  public async logout() {
+    await this.usuarioCtrl.logout()
   }
 }

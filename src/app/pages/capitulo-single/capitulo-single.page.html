@@ -1,0 +1,18 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Atividades - {{ capitulo.nome }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="primary">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-content>
+    <div class="campanhas">
+      <ng-template ngFor let-campanha [ngForOf]="campanhas">
+        <app-campanha-item [campanha]="campanha" (click)="dismiss()"></app-campanha-item>
+      </ng-template>
+    </div>
+  </app-content>
+</ion-content>

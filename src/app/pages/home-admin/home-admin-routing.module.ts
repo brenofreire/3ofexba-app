@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeAdminPage
+  },
+  {
+    path: 'selecionar-regiao',
+    loadChildren: () => import('./selecionar-regiao/selecionar-regiao.module').then( m => m.SelecionarRegiaoPageModule)
   }
 ];
 
