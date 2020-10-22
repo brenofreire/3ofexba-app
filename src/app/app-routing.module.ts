@@ -25,13 +25,18 @@ const routes: Routes = [
   {
     path: 'agostinho',
     loadChildren: () => import('./pages/agostinho/agostinho.module').then(m => m.AgostinhoPageModule)
-  },  {
+  },
+  {
     path: 'criar-editar-tarefa',
     loadChildren: () => import('./pages/tarefas/criar-editar-tarefa/criar-editar-tarefa.module').then( m => m.CriarEditarTarefaPageModule)
   },
   {
     path: 'capitulo-single',
     loadChildren: () => import('./pages/capitulo-single/capitulo-single.module').then( m => m.CapituloSinglePageModule)
+  },
+  {
+    path: 'editar-criar-tarefa',
+    loadChildren: () => import('./pages/home-admin/editar-criar-tarefa/editar-criar-tarefa-routing.module').then( m => m.EditarCriarTarefaPageRoutingModule)
   },
 
 ];

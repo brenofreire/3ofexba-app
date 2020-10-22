@@ -10,6 +10,9 @@
 <ion-content>
   <app-content>
 
+    <app-loader *ngIf="carregando" texto="Carregando informações...">
+    </app-loader>
+
     <ng-template [ngIf]="!carregando">
       <div class="seletores-capitulo">
 

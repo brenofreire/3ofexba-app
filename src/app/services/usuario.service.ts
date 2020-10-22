@@ -7,6 +7,12 @@ import { ApiService } from './api.service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+export const cargosEnum = {
+  mc: 'Mestre Conselheiro',
+  esc: 'Escrivão',
+  tes: 'Tesoureiro',
+  hos: 'Hospitaleiro',
+}
 
 @Injectable({
   providedIn: 'root'
@@ -87,12 +93,7 @@ export class UsuarioService {
   }
 
   public toMeuCargo(options: { usuarioLogado }) {    
-    const cargos = {
-      mc: 'Mestre Conselheiro',
-      esc: 'Escrivão',
-      tes: 'Tesoureiro',
-      hos: 'Hospitaleiro',
-    }
+    const cargos = cargosEnum
 
     return cargos[options.usuarioLogado.cargo]
   }

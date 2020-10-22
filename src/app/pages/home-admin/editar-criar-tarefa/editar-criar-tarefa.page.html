@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Criar ou editar tarefa</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" fill="clear" (click)="dismiss()">
+        Fechar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-content>
+
+    <div class="form-editar-tarefa">
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="tarefa.nome" placeholder="Nome da atividade"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" *ngIf="tiposCampanha">
+        <ion-label position="stacked">Campanha</ion-label>
+        <ion-select [(ngModel)]="tarefa.tipo" placeholder="Selecione uma Campanha" [value]="tarefa.tipo" okText="Ok"
+          cancelText="Cancelar">
+          <ion-select-option *ngFor="let tipoIndex of objectKeys(tiposCampanha)" [value]="tipoIndex">
+            {{ tiposCampanha[tipoIndex] }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Cargo</ion-label>
+        <ion-select placeholder="Cargo da atividade" [(ngModel)]="tarefa.cargo_tarefa" [value]="tarefa.cargo_tarefa"
+          okText="Ok" cancelText="Cancelar">
+          <ion-select-option value="mc">Mestre Conselheiro</ion-select-option>
+          <ion-select-option value="esc">Escrivão</ion-select-option>
+          <ion-select-option value="tes">Tesoureiro</ion-select-option>
+          <ion-select-option value="hos">Hospitaleiro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+  </app-content>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="criarEditarTarefa()">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      {{  tarefa.id ? 'Editar tarefa' : 'Criar tarefa' }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

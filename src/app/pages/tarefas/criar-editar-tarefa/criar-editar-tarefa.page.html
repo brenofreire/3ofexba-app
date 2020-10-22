@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Criar ou editar tarefa</ion-title>
+    <ion-title>Lista de tarefas</ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()" color="primary">Fechar</ion-button>
@@ -12,8 +12,30 @@
 
   <app-content>
     <ng-template ngFor let-campanha [ngForOf]="campanhas">
-      <app-campanha-item [campanha]="campanha"></app-campanha-item>
+      <!-- Criar comp -->
+      <div class="campanha-item-admin" (click)="abrirEditarCriarTarefa(campanha)">
+        <div class="nome-campanha">
+          {{ campanha.nome }}
+        </div>
+        <div class="campanha-info">
+          <span class="campanha-badge-cargos white">
+            {{ campanha.tipoLabel }}
+          </span>
+          <span class="campanha-badge-cargos">
+            {{ cargosEnum[campanha.cargo_tarefa] }}
+          </span>
+        </div>
+      </div>
     </ng-template>
   </app-content>
 
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button expand="block">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Criar campanha
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

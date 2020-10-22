@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TarefasService } from 'src/app/services/tarefas.service';
+import { cargosEnum } from 'src/app/services/usuario.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { EditarCriarTarefaPage } from '../../home-admin/editar-criar-tarefa/editar-criar-tarefa.page';
 
 @Component({
   selector: 'app-criar-editar-tarefa',
@@ -12,6 +14,7 @@ export class CriarEditarTarefaPage implements OnInit {
   public campanhas: any[]
   public termoBusca: string
   public carregando: boolean
+  public cargosEnum = cargosEnum
 
   constructor(
     private tarefasCtrl: TarefasService,
@@ -23,21 +26,34 @@ export class CriarEditarTarefaPage implements OnInit {
     await this.inicializaPagina()
   }
 
-  async inicializaPagina() {
+  async inicializaPagina(recarregarDoZero?) {
     this.carregando = true
     try {
       this.campanhas = await this.tarefasCtrl.getCampanhasAdmin({
-        offset: this.campanhas && this.campanhas.length || 0,
+        offset: recarregarDoZero ? 0 : this.campanhas && this.campanhas.length || 0,
         termoBusca: this.termoBusca || ''
       })
-
-      console.log(this.campanhas)
     } catch (error) {
       await this.utilsCtrl.mostrarAlert(
         'Ops... houve um erro', 'Tente listar campanhas novamente mais tarde'
       )
     } finally {
       this.carregando = false
+    }
+  }
+
+  async abrirEditarCriarTarefa(tarefa) {
+    const modalEditarCriarTarefa = await this.modalCtrl.create({
+      component: EditarCriarTarefaPage,
+      componentProps: { tarefa }
+    })    
+    
+    await modalEditarCriarTarefa.present()
+
+    const { data } = await modalEditarCriarTarefa.onDidDismiss()
+
+    if(data) {
+      await this.inicializaPagina(true)
     }
   }
 

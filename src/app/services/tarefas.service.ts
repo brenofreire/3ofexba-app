@@ -43,19 +43,19 @@ export class TarefasService {
     }
   }
 
-  public async actionSheetStatusTarefa(options: { tarefa, cargo? }) {
+  public async actionSheetStatusTarefa(options: { tarefa, cargo?}) {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'O que deseja fazer?',
       buttons: [{
         text: 'Mudar status da atividade',
         handler: async () => {
-          this.tarefa = options.tarefa          
-          
-          if(this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {      
+          this.tarefa = options.tarefa
+
+          if (this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {
             return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
           }
 
-          const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)          
+          const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)
 
           if (cargosPermitidosParaEditar.includes(options.cargo) && this.usuario.role !== 'admin') {
             const alertMudarStatus = await this.alertMudarStatus({ tarefa: this.tarefa })
@@ -63,12 +63,12 @@ export class TarefasService {
             await alertMudarStatus.present()
 
             const { data } = await alertMudarStatus.onDidDismiss()
-        
+
             if (data) {
               options.tarefa.status = data.value
-        
+
               await this.mudarStatus(options)
-        
+
               await actionSheet.dismiss({
                 statusSlug: data.value,
                 statusNome: data.label,
@@ -103,7 +103,7 @@ export class TarefasService {
         value: 'atividade-nao-formulada',
         checked: this.tarefa.statusCapitulo === 0,
         handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 0 
+          ...data, statusCapitulo: 0
         })
       }, {
         type: 'radio',
@@ -190,7 +190,7 @@ export class TarefasService {
 
   public async getCampanhasAdmin(options: { offset, termoBusca }) {
     try {
-      const url = `campanhas?offset=${options.offset}&termoBusca${options.termoBusca}`
+      const url = `admin/campanhas?offset=${options.offset}&termoBusca${options.termoBusca}`
       const campanhas = await this.apiCtrl.get(url)
 
       for (const key in campanhas) {
@@ -198,6 +198,27 @@ export class TarefasService {
       }
 
       return campanhas
+    } catch ({ error }) {
+      throw error
+    }
+  }
+
+  public async editarCriarTarefa(options: { nome, tipo, cargo_tarefa, status, }) {
+    try {
+      const editarCriarTarefa = await this.apiCtrl.post('admin/campanhas', options)
+
+      return editarCriarTarefa
+    } catch ({ error }) {
+      throw error
+    }
+  }
+
+  async getCampanhasTipo() {
+    try {
+      const url = `campanhas/tipos`
+      const tiposCampanha = await this.apiCtrl.get(url)
+
+      return tiposCampanha
     } catch ({ error }) {
       throw error
     }

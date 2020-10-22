@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'selecionar-regiao',
     loadChildren: () => import('./selecionar-regiao/selecionar-regiao.module').then( m => m.SelecionarRegiaoPageModule)
+  },
+  {
+    path: 'editar-criar-tarefa',
+    loadChildren: () => import('./editar-criar-tarefa/editar-criar-tarefa.module').then( m => m.EditarCriarTarefaPageModule)
   }
 ];
 

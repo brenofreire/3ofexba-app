@@ -50,3 +50,9 @@ ion-title {
 ion-back-button {
     --color: #fff;
 }
+
+ion-footer {
+    ion-toolbar {
+        padding: 0px 10px;
+    }
+}
