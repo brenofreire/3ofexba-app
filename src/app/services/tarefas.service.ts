@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { UsuarioService } from './usuario.service';
 import { UtilsService } from './utils.service';
+import * as moment from 'moment'
 
 @Injectable({
   providedIn: 'root'
@@ -203,8 +204,10 @@ export class TarefasService {
     }
   }
 
-  public async editarCriarTarefa(options: { nome, tipo, cargo_tarefa, status, }) {
+  public async editarCriarTarefa(options: { nome, tipo, cargo_tarefa, data_entrega, data_final_semestre, status, }) {
     try {
+      options.data_entrega = moment(options.data_entrega).endOf('day').format('YYYY-MM-DD HH:mm:ss')
+      options.data_final_semestre = moment(options.data_final_semestre).endOf('day').format('YYYY-MM-DD HH:mm:ss')
       const editarCriarTarefa = await this.apiCtrl.post('admin/campanhas', options)
 
       return editarCriarTarefa

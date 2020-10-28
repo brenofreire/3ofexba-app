@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Lista de tarefas</ion-title>
+    <ion-title>Lista de atividades</ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()" color="primary">Fechar</ion-button>
@@ -24,6 +24,9 @@
           <span class="campanha-badge-cargos">
             {{ cargosEnum[campanha.cargo_tarefa] }}
           </span>
+          <span class="campanha-badge-cargos">
+            {{ campanha.data_entrega | date: 'dd/MM/yyyy' }}
+          </span>
         </div>
       </div>
     </ng-template>
@@ -33,9 +36,9 @@
 
 <ion-footer class="ion-no-border">
   <ion-toolbar>
-    <ion-button expand="block">
-      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-      Criar campanha
+    <ion-button expand="block" (click)="abrirEditarCriarTarefa({})">
+      <ion-icon name="flag-outline" slot="start"></ion-icon>
+      Criar atividade
     </ion-button>
   </ion-toolbar>
 </ion-footer>

@@ -39,6 +39,8 @@ export class EditarCriarTarefaPage implements OnInit {
       )
 
       this.modificouAtividade = true
+
+      await this.dismiss()
     } catch (error) {
       const erroMensagem = error && error.mensagem ? error.mensagem 
       : `Houve um erro inesperado ao ${this.tarefa.id ? 'editar' : 'criar'} atividade`
