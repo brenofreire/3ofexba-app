@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page';
+import { EditarCadastroPage } from './editar-cadastro/editar-cadastro.page';
 import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page';
 
 @Component({
@@ -19,26 +20,34 @@ export class HomeAdminPage implements OnInit {
 
   ngOnInit() {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(usuarioLogado => {
-      if(usuarioLogado) {
+      if (usuarioLogado) {
         this.usuarioLogado = usuarioLogado
       }
     })
   }
 
   async abrirCriacaoEdicaoCampanha() {
-    const modalCriacaoEdicaoCamapanha = await this.modalCtrl.create({
-      component: CriarEditarTarefaPage,      
+    await this.abrirModal({
+      component: CriarEditarTarefaPage,
     })
-
-    return await modalCriacaoEdicaoCamapanha.present()
   }
 
   async selecionarRegiao() {
-    const modalCriacaoEdicaoCamapanha = await this.modalCtrl.create({
+    await this.abrirModal({
       component: SelecionarRegiaoPage,
     })
+  }
 
-    return await modalCriacaoEdicaoCamapanha.present()
+  async abrirEdicaoCadastro() {
+    await this.abrirModal({
+      component: EditarCadastroPage,
+    })
+  }
+
+  async abrirModal({ component }) {
+    const abrirModal = await this.modalCtrl.create({ component })
+
+    return await abrirModal.present()
   }
 
   public async logout() {

@@ -9,6 +9,7 @@ import { TarefaItemComponent } from './tarefa-item/tarefa-item.component';
 import { ContentComponent } from './content-demolay/content.component';
 import { BotoesAcaoComponent } from './botoes-acao/botoes-acao.component';
 import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component';
+import { CadastroItemComponent } from './cadastro-item/cadastro-item.component';
 
 
 
@@ -21,6 +22,7 @@ import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component';
     ContentComponent,
     BotoesAcaoComponent,
     PseudoTitleComponent,
+    CadastroItemComponent,
   ],
   entryComponents: [
     LoaderComponent, 
@@ -30,6 +32,7 @@ import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component';
     ContentComponent,
     BotoesAcaoComponent,
     PseudoTitleComponent,
+    CadastroItemComponent,
   ],
   imports: [
     FormsModule,
@@ -44,6 +47,7 @@ import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component';
     ContentComponent,
     BotoesAcaoComponent,
     PseudoTitleComponent,
+    CadastroItemComponent,
   ]
 })
 export class ComponentsModule { }

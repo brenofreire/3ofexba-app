@@ -1,0 +1,39 @@
+<div class="cadastro-item">
+  <div class="info">
+    <div class="info-text" *ngIf="!editarCadastro">
+      <h2>{{ usuario.nome }}</h2>
+      <span>{{ usuario.capitulo }}</span>
+    </div>
+
+    <div class="info-button">
+      <ion-button fill="clear" *ngIf="!editarCadastro" (click)="editarCadastro = true">
+        Editar
+      </ion-button>
+    </div>
+
+  </div>
+
+  <div class="form-info" *ngIf="editarCadastro">
+    <ion-input [(ngModel)]="usuario.nome"></ion-input>
+    <ion-input [(ngModel)]="usuario.capitulo" type="number"></ion-input>
+    <ion-input [(ngModel)]="usuario.email"></ion-input>
+    <ion-input [(ngModel)]="usuario.id_demolay"></ion-input>
+    <ion-input [(ngModel)]="usuario.password" placeholder="Mudar senha" [type]="tipoSenha"></ion-input>
+
+    <ion-button fill="clear" expand="block" (click)="tipoSenha = tipoSenha === 'password' ? 'text' : 'password'">
+      <ion-icon name="eye-outline" slot="start"></ion-icon>
+      Ver senha
+    </ion-button>
+    
+    <div class="form-info-buttons">
+      <ion-button fill="clear" expand="block" (click)="usuario = usuarioSemEditar; editarCadastro = false">
+        <ion-icon name="close-outline" slot="start"></ion-icon>
+        Fechar
+      </ion-button>
+      <ion-button fill="clear" expand="block" *ngIf="editarCadastro" (click)="editarCadastro = false">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        Salvar
+      </ion-button>
+    </div>
+  </div>
+</div>

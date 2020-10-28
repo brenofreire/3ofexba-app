@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Lista de cadastros</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" (click)="dismiss()">
+        Fechar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-content>
+    <ion-searchbar class="ion-no-padding" [(ngModel)]="termoBusca" (ionChange)="getUsuarios(true)">
+
+    </ion-searchbar>
+
+    <app-loader *ngIf="carregando" texto="Carregando lista de usuarios...">      
+    </app-loader>
+
+    <ng-template *ngIf="!carregando" ngFor let-usuario [ngForOf]="usuarios">
+      <app-cadastro-item [usuario]="usuario"></app-cadastro-item>
+    </ng-template>
+  </app-content>
+</ion-content>

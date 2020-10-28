@@ -97,4 +97,15 @@ export class UsuarioService {
 
     return cargos[options.usuarioLogado.cargo]
   }
+
+  public async getUsuariosAdmin(options: { termoBusca, offset }) {    
+    try {
+      const url = `admin/usuarios?offset=${options.offset}&termoBusca=${options.termoBusca}`
+      const usuarios = await this.apiCtrl.get(url)
+
+      return usuarios
+    } catch ({error}) {
+      throw error
+    }
+  }
 }
