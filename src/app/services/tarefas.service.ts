@@ -56,9 +56,9 @@ export class TarefasService {
             return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
           }
 
-          const cargosPermitidosParaEditar: any[] = JSON.parse(this.tarefa.cargo_tarefa)
+          const cargosPermitidosParaEditar: any[] = this.tarefa.cargo_tarefa
 
-          if (cargosPermitidosParaEditar.includes(options.cargo) && this.usuario.role !== 'admin') {
+          if (cargosPermitidosParaEditar === options.cargo && this.usuario.role !== 'admin') {
             const alertMudarStatus = await this.alertMudarStatus({ tarefa: this.tarefa })
 
             await alertMudarStatus.present()
@@ -161,6 +161,7 @@ export class TarefasService {
         await this.enviarTarefa({
           slugCampanha: options.tarefa.slug,
           tipoCampanha: options.tarefa.tipo,
+          status: options.tarefa.status,
         })
 
         await this.utilsCtrl.mostrarToast('Atividade enviada com sucesso')
@@ -179,7 +180,7 @@ export class TarefasService {
     }
   }
 
-  public async enviarTarefa(options: { slugCampanha, tipoCampanha }) {
+  public async enviarTarefa(options: { slugCampanha, tipoCampanha, status? }) {
     try {
       const criaTarefa = await this.apiCtrl.post('tarefas', options)
 
