@@ -12,15 +12,43 @@
 <ion-content>
 
   <app-content>
-    <ion-searchbar class="ion-no-padding" [(ngModel)]="termoBusca" (ionChange)="getUsuarios(true)">
-
+    <ion-searchbar class="ion-no-padding" [(ngModel)]="termoBusca" (ionChange)="getUsuarios(true)"
+      placeholder="Buscar cadastros...">
     </ion-searchbar>
 
-    <app-loader *ngIf="carregando" texto="Carregando lista de usuarios...">      
+    <small>A busca pode ser feita por nome, id, email ou número do capítulo!</small>
+
+    <app-loader *ngIf="carregando" texto="Carregando lista de usuarios...">
     </app-loader>
+
+    <ion-segment (ionChange)="mudarFiltroUsuarios()" [(ngModel)]="filtroStatusUsuario" mode="ios">
+      <ion-segment-button value="" color="primary">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="ativo" color="primary">
+        <ion-label>Ativos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="excluido" color="primary">
+        <ion-label>Excluidos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pendente" color="primary">
+        <ion-label>Pendente</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
     <ng-template *ngIf="!carregando" ngFor let-usuario [ngForOf]="usuarios">
       <app-cadastro-item [usuario]="usuario"></app-cadastro-item>
     </ng-template>
+
+    <ion-item class="busca-vazia" lines="none" *ngIf="!carregando && (!usuarios || !usuarios.length)">
+      Nenhum cadastro encontrado...
+      <ion-icon name="search-circle-outline" slot="start"></ion-icon>
+    </ion-item>
+
+    <ion-infinite-scroll threshold="10px" *ngIf="deveMostrarInfiniteScroll" (ionInfinite)="getUsuarios(false)">
+      <ion-infinite-scroll-content loadingSpinner="dots">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
   </app-content>
 </ion-content>

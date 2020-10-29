@@ -2,3 +2,20 @@ app-cadastro-item {
     display: block;
     margin-bottom: 8px;
 }
+
+ion-segment {
+    margin: 8px 0;
+    ion-segment-button {        
+        font-size: 10px;
+        --indicator-color: rgba(0,0,0,0.25);
+    }
+}
+
+.busca-vazia {
+    font-size: 14px;
+    --color: #fff;
+    ion-icon {
+        --color: #fff;
+        color: #fff;
+    }
+}

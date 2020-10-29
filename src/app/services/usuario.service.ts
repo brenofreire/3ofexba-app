@@ -18,7 +18,6 @@ export const cargosEnum = {
   providedIn: 'root'
 })
 export class UsuarioService {
-
   constructor(
     private store: Store<State>,
     private apiCtrl: ApiService,
@@ -30,7 +29,7 @@ export class UsuarioService {
   public getUsuariologadoObservable(): Observable<any> {
     return this.store.select(getUsuarioLogado)
   }
-  
+
   public setUsuarioLogado(usuario) {
     this.store.dispatch(new UsuarioActions.UsuarioLogado(usuario))
   }
@@ -41,7 +40,7 @@ export class UsuarioService {
       await this.salvarInformacoesUsuarioStorage(info)
 
       return info.usuario
-    } catch ({error}) {
+    } catch ({ error }) {
       throw error
     }
   }
@@ -49,18 +48,18 @@ export class UsuarioService {
   public async cadastro(options: { username, password }) {
     try {
       await this.apiCtrl.post('cadastro', options)
-    } catch ({error}) {
+    } catch ({ error }) {
       throw error
     }
   }
 
-  public async salvarInformacoesUsuarioStorage (options: { usuario, token }) {
+  public async salvarInformacoesUsuarioStorage(options: { usuario, token }) {
     await this.storage.set('usuario', options.usuario)
     await this.storage.set('usuario-token', options.token)
     this.setUsuarioLogado(options.usuario)
   }
 
-  public getHomeRoute (role: 'comun' | 'regional' | 'admin') {
+  public getHomeRoute(role: 'comun' | 'regional' | 'admin') {
     const rotasUsuarios = {
       comum: 'home',
       regional: 'home-regional',
@@ -75,36 +74,51 @@ export class UsuarioService {
       header: 'Você está prestes sair da conta',
       subHeader: 'Tem certeza disso?',
       buttons: ['Cancelar', {
-          text: 'Sair da conta',
-          handler: async () => {
-            await this.removerInformacoesUsuarioStorage()
-            await this.routerCtrl.navigateByUrl('')
-          }
+        text: 'Sair da conta',
+        handler: async () => {
+          await this.removerInformacoesUsuarioStorage()
+          await this.routerCtrl.navigateByUrl('')
         }
+      }
       ]
     })
 
     return await logoutAlert.present()
   }
 
-  public async removerInformacoesUsuarioStorage () {
+  public async removerInformacoesUsuarioStorage() {
     await this.storage.clear()
     this.setUsuarioLogado(null)
   }
 
-  public toMeuCargo(options: { usuarioLogado }) {    
+  public toMeuCargo(options: { usuarioLogado }) {
     const cargos = cargosEnum
 
     return cargos[options.usuarioLogado.cargo]
   }
 
-  public async getUsuariosAdmin(options: { termoBusca, offset }) {    
+  public async getUsuariosAdmin(options: { termoBusca, offset, filtroStatusUsuario }) {
     try {
-      const url = `admin/usuarios?offset=${options.offset}&termoBusca=${options.termoBusca}`
+      let url = `admin/usuarios?offset=${options.offset}`
+      url += `&termoBusca=${options.termoBusca}`
+      url += `&filtroStatus=${options.filtroStatusUsuario}`
+      
       const usuarios = await this.apiCtrl.get(url)
 
       return usuarios
-    } catch ({error}) {
+    } catch ({ error }) {
+      throw error
+    }
+  }
+
+  async editarCadastroUsuario(usuario) {
+    try {
+      const usuarioEditado = await this.apiCtrl.post('admin/usuarios', usuario)
+
+      return usuarioEditado
+    } catch ({ error }) {
+      console.log(error)
+
       throw error
     }
   }

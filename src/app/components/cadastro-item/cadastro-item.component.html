@@ -20,20 +20,42 @@
     <ion-input [(ngModel)]="usuario.id_demolay"></ion-input>
     <ion-input [(ngModel)]="usuario.password" placeholder="Mudar senha" [type]="tipoSenha"></ion-input>
 
+    <ion-select class="ion-no-padding" [(ngModel)]="usuario.status" okText="Selecionar" cancelText="Cancelar"
+      [interfaceOptions]="customAlertOptions">
+      <ion-select-option value="exluido">
+        Excluído
+      </ion-select-option>
+      <ion-select-option value="ativo">
+        Ativo
+      </ion-select-option>
+      <ion-select-option value="suspenso">
+        Suspenso
+      </ion-select-option>
+      <ion-select-option value="pendente">
+        Pendente
+      </ion-select-option>
+    </ion-select>
+
     <ion-button fill="clear" expand="block" (click)="tipoSenha = tipoSenha === 'password' ? 'text' : 'password'">
       <ion-icon name="eye-outline" slot="start"></ion-icon>
       Ver senha
     </ion-button>
-    
+
     <div class="form-info-buttons">
-      <ion-button fill="clear" expand="block" (click)="usuario = usuarioSemEditar; editarCadastro = false">
+
+      <ion-button fill="clear" expand="block" (click)="usuario = usuarioSemEditar; editarCadastro = false"
+        [disabled]="carregandoEdicao">
         <ion-icon name="close-outline" slot="start"></ion-icon>
         Fechar
       </ion-button>
-      <ion-button fill="clear" expand="block" *ngIf="editarCadastro" (click)="editarCadastro = false">
+
+      <ion-button fill="clear" expand="block" *ngIf="editarCadastro"
+        (click)="editarCadastro = false; editarCadastroUsuario()" [disabled]="carregandoEdicao">
         <ion-icon name="save-outline" slot="start"></ion-icon>
+        <ion-spinner slot="start" *ngIf="carregandoEdicao"></ion-spinner>
         Salvar
       </ion-button>
+
     </div>
   </div>
 </div>

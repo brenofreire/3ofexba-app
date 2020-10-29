@@ -9,9 +9,11 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./editar-cadastro.page.scss'],
 })
 export class EditarCadastroPage implements OnInit {
-  public usuarios: any[]
+  public usuarios: any[] = []
   public termoBusca: any = ''
   public carregando = true
+  public filtroStatusUsuario = ''
+  public deveMostrarInfiniteScroll = false
 
   constructor(
     private usuariosCtrl: UsuarioService,
@@ -27,10 +29,24 @@ export class EditarCadastroPage implements OnInit {
     this.carregando = false
 
     try {
-      this.usuarios = await this.usuariosCtrl.getUsuariosAdmin({
+      const usuariosCarregados = await this.usuariosCtrl.getUsuariosAdmin({
         termoBusca: this.termoBusca,
         offset: !zerarLista ? this.usuarios && this.usuarios.length || 0 : 0,
+        filtroStatusUsuario: this.filtroStatusUsuario
       })
+
+      if(zerarLista) {
+        this.usuarios = usuariosCarregados
+      } else {
+        this.usuarios.push(...usuariosCarregados)
+      }
+
+      this.deveMostrarInfiniteScroll = !!(
+        usuariosCarregados && usuariosCarregados.length
+        && usuariosCarregados.length >= 10
+      )
+
+      console.log(this.deveMostrarInfiniteScroll)
     } catch (error) {
       await this.utilsCtrl.mostrarAlert(
         'Ops... Houve um erro ao listar usuários', 
@@ -44,5 +60,9 @@ export class EditarCadastroPage implements OnInit {
 
   async dismiss() {
     await this.modalCtrl.dismiss()
+  }
+
+  async mudarFiltroUsuarios() {
+    await this.getUsuarios(true)
   }
 }
