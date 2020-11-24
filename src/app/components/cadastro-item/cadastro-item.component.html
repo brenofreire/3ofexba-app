@@ -14,10 +14,30 @@
   </div>
 
   <div class="form-info" *ngIf="editarCadastro">
-    <ion-input [(ngModel)]="usuario.nome"></ion-input>
-    <ion-input [(ngModel)]="usuario.capitulo" type="number"></ion-input>
-    <ion-input [(ngModel)]="usuario.email"></ion-input>
-    <ion-input [(ngModel)]="usuario.id_demolay"></ion-input>
+    <ion-input [(ngModel)]="usuario.nome" placeholder="Nome"></ion-input>
+    <ion-input [(ngModel)]="usuario.capitulo" type="number" placeholder="Número do Capítulo"></ion-input>
+    <ion-input [(ngModel)]="usuario.email" placeholder="Email do usuário"></ion-input>
+    <ion-input [(ngModel)]="usuario.id_demolay" placeholder="CID do usuário"></ion-input>
+
+    <ion-select class="ion-no-padding" [(ngModel)]="usuario.role" okText="Selecionar" cancelText="Cancelar"
+      header="Tipo de usuário">
+      <ion-select-option value="comum">
+        Comum
+      </ion-select-option>
+      <ion-select-option value="regional">
+        Regional
+      </ion-select-option>
+      <ion-select-option value="admin">
+        Admin
+      </ion-select-option>
+    </ion-select>
+
+    <ion-item class="ion-no-padding input-ofex" lines="none">
+      <ion-label>Ofex</ion-label>
+      <ion-input [(ngModel)]="usuario.cargo" *ngIf="usuario.role === 'regional'" placeholder="Ofex" type="number">
+      </ion-input>
+    </ion-item>
+
     <ion-input [(ngModel)]="usuario.password" placeholder="Mudar senha" [type]="tipoSenha"></ion-input>
 
     <ion-select class="ion-no-padding" [(ngModel)]="usuario.status" okText="Selecionar" cancelText="Cancelar"

@@ -58,14 +58,7 @@ export class SelecionarRegiaoPage implements OnInit {
   }
 
   async abrirCapituloDetalhado(capitulo) {
-    await this.dismiss()
-
-    const modalCapituloDetalhado = await this.modalCtrl.create({
-      component: CapituloSinglePage,
-      componentProps: { capitulo }
-    })
-
-    await modalCapituloDetalhado.present()
+    await this.dismiss()   
   }
 
   async dismiss() {

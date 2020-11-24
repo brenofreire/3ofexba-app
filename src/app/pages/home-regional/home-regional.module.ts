@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { HomeRegionalPageRoutingModule } from './home-regional-routing.module';
 
 import { HomeRegionalPage } from './home-regional.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeRegionalPageRoutingModule
+    HomeRegionalPageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [HomeRegionalPage]
 })

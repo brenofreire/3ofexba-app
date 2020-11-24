@@ -112,6 +112,7 @@ export class UsuarioService {
 
   async editarCadastroUsuario(usuario) {
     try {
+      usuario.cargo = String(usuario.cargo)
       const usuarioEditado = await this.apiCtrl.post('admin/usuarios', usuario)
 
       return usuarioEditado

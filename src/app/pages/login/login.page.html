@@ -5,6 +5,10 @@
 
       <div class="form-login-cadastro">
 
+        <div class="input-azul" *ngIf="isCadastro">
+          <ion-label>Nome</ion-label>
+          <ion-input [(ngModel)]="informacoesUsuario.nome"></ion-input>
+        </div>
         <div class="input-azul">
           <ion-label>Email</ion-label>
           <ion-input [(ngModel)]="informacoesUsuario.email"></ion-input>

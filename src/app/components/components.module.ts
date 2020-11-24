@@ -10,6 +10,7 @@ import { ContentComponent } from './content-demolay/content.component';
 import { BotoesAcaoComponent } from './botoes-acao/botoes-acao.component';
 import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component';
 import { CadastroItemComponent } from './cadastro-item/cadastro-item.component';
+import { CapitulosRegiaoComponent } from './capitulos-regiao/capitulos-regiao.component';
 
 
 
@@ -23,6 +24,7 @@ import { CadastroItemComponent } from './cadastro-item/cadastro-item.component';
     BotoesAcaoComponent,
     PseudoTitleComponent,
     CadastroItemComponent,
+    CapitulosRegiaoComponent,
   ],
   entryComponents: [
     LoaderComponent, 
@@ -33,6 +35,7 @@ import { CadastroItemComponent } from './cadastro-item/cadastro-item.component';
     BotoesAcaoComponent,
     PseudoTitleComponent,
     CadastroItemComponent,
+    CapitulosRegiaoComponent,
   ],
   imports: [
     FormsModule,
@@ -48,6 +51,7 @@ import { CadastroItemComponent } from './cadastro-item/cadastro-item.component';
     BotoesAcaoComponent,
     PseudoTitleComponent,
     CadastroItemComponent,
+    CapitulosRegiaoComponent,
   ]
 })
 export class ComponentsModule { }
