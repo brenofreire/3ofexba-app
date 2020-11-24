@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { AcompanhamentoPage } from '../acompanhamento/acompanhamento.page';
 import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page';
 import { EditarCadastroPage } from './editar-cadastro/editar-cadastro.page';
 import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page';
@@ -52,5 +53,15 @@ export class HomeAdminPage implements OnInit {
 
   public async logout() {
     await this.usuarioCtrl.logout()
+  }
+
+  public async abrirPage(nomeDaPagina: 'acompanhamento') {
+    const modaisPossiveis = {
+      acompanhamento: AcompanhamentoPage
+    }
+
+    await this.abrirModal({
+      component: modaisPossiveis[nomeDaPagina]
+    })
   }
 }

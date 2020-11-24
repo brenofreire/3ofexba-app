@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: 'editar-criar-tarefa',
     loadChildren: () => import('./pages/home-admin/editar-criar-tarefa/editar-criar-tarefa-routing.module').then( m => m.EditarCriarTarefaPageRoutingModule)
+  },  {
+    path: 'acompanhamento',
+    loadChildren: () => import('./pages/acompanhamento/acompanhamento.module').then( m => m.AcompanhamentoPageModule)
   },
+
 
 ];
 @NgModule({

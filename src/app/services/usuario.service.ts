@@ -79,8 +79,7 @@ export class UsuarioService {
           await this.removerInformacoesUsuarioStorage()
           await this.routerCtrl.navigateByUrl('')
         }
-      }
-      ]
+      }]
     })
 
     return await logoutAlert.present()
@@ -102,7 +101,7 @@ export class UsuarioService {
       let url = `admin/usuarios?offset=${options.offset}`
       url += `&termoBusca=${options.termoBusca}`
       url += `&filtroStatus=${options.filtroStatusUsuario}`
-      
+
       const usuarios = await this.apiCtrl.get(url)
 
       return usuarios
@@ -117,8 +116,18 @@ export class UsuarioService {
 
       return usuarioEditado
     } catch ({ error }) {
-      console.log(error)
+      throw error
+    }
+  }
 
+  async postarAgostinho(postagem: {
+    mensagem: string,
+    destinatarios: string[],
+    remetente: string | number,
+  }) {
+    try {
+      await this.apiCtrl.post('agostinho', postagem)
+    } catch ({ error }) {
       throw error
     }
   }

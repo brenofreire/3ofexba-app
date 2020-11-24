@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Acompanhamento</ion-title>
+
+
+    <ion-button (click)="dismiss()" fill="clear" slot="end">Fechar</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-content>
+
+    <ion-textarea [(ngModel)]="postagem.mensagem" rows="4" placeholder="Digite sua mensagem aqui...">
+    </ion-textarea>
+
+    <ion-select [(ngModel)]="postagem.destinatarios" multiple cancelText="Cancelar" okText="Selecionar"
+      placeholder="Escolha os cargos para enviar mensagem" [interfaceOptions]="customAlertOptions">
+      <ion-select-option value="mc">Mestre Conselheiro</ion-select-option>
+      <ion-select-option value="esc">Escrivão</ion-select-option>
+      <ion-select-option value="tes">Tesoureiro</ion-select-option>
+      <ion-select-option value="hos">Hospitaleiro</ion-select-option>
+    </ion-select>
+
+  </app-content>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="isBotaoHabilitado()" (click)="postar()" expand="block">
+      Postar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

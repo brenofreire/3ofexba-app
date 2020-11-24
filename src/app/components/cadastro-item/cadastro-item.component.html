@@ -37,8 +37,17 @@
     </ion-select>
 
     <ion-button fill="clear" expand="block" (click)="tipoSenha = tipoSenha === 'password' ? 'text' : 'password'">
-      <ion-icon name="eye-outline" slot="start"></ion-icon>
-      Ver senha
+
+      <ng-template [ngIf]="tipoSenha === 'password'">
+        <ion-icon name="eye-outline" slot="start"></ion-icon>
+        Ver senha
+      </ng-template>
+
+      <ng-template [ngIf]="tipoSenha !== 'password'">
+        <ion-icon name="eye-off-outline" slot="start"></ion-icon>
+        Esconder senha
+      </ng-template>
+
     </ion-button>
 
     <div class="form-info-buttons">
