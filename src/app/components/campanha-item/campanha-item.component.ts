@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./campanha-item.component.scss'],
 })
 export class CampanhaItemComponent implements OnInit {
-
   @Input('campanha') campanha
   public usuarioLogado
+  public isAdmin = false
 
   constructor(
     private usuarioCtrl: UsuarioService,
@@ -20,6 +20,7 @@ export class CampanhaItemComponent implements OnInit {
   ngOnInit() {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(item => {
       this.usuarioLogado = item
+      this.isAdmin = this.usuarioLogado.role === 'admin'
     })
   }
 

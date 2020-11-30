@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class LoginPage implements OnInit {
   public informacoesUsuario:any = {}
+  public isCadastro = false
 
   constructor(
     private usuarioCtrl: UsuarioService,

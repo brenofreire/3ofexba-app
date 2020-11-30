@@ -27,7 +27,7 @@
     </div>
 
     <ion-infinite-scroll 
-      threshold="100px" *ngIf="mensagensAgostinho && mensagensAgostinho >= 10" 
+      threshold="100px" *ngIf="mensagensAgostinho && mensagensAgostinho.length >= 10" 
       (ionInfinite)="carregarMaisMensagens($event)">
       <ion-infinite-scroll-content loadingSpinner="dots">
       </ion-infinite-scroll-content>
