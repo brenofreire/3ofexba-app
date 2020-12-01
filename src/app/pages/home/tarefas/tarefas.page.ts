@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TarefasService } from 'src/app/services/tarefas.service';
-import { ActivatedRoute } from '@angular/router';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-tarefas',
@@ -15,13 +15,12 @@ export class TarefasPage implements OnInit {
 
   constructor(
     private tarefasCtrl: TarefasService,
-    private route: ActivatedRoute,
+    private modalCtrl: ModalController,
+    private navParams: NavParams,
   ) { }
 
   async ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.slugTarefa = params.get('tipoCampanha')
-    })
+    this.slugTarefa = this.navParams.get('slugTarefa')
 
     await this.getTarefas()
   }
@@ -42,4 +41,7 @@ export class TarefasPage implements OnInit {
     }
   }
 
+  async dismiss() {
+    await this.modalCtrl.dismiss()
+  }
 }

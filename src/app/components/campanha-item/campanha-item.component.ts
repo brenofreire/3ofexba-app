@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { TarefasPage } from 'src/app/pages/home/tarefas/tarefas.page';
 
 @Component({
   selector: 'app-campanha-item',
@@ -14,7 +15,7 @@ export class CampanhaItemComponent implements OnInit {
 
   constructor(
     private usuarioCtrl: UsuarioService,
-    private routerCtrl: Router,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -41,6 +42,15 @@ export class CampanhaItemComponent implements OnInit {
   }
 
   async abrirCamapnha() {
-    await this.routerCtrl.navigateByUrl(`home/campanha/${this.campanha.slug}`)
+    const modalCampanha = await this.modalCtrl.create({
+      component: TarefasPage,
+      componentProps: {
+        slugTarefa: this.campanha.slug
+      }
+    })
+
+    setTimeout(async () => {
+      await modalCampanha.present()
+    }, 200)
   }
 }

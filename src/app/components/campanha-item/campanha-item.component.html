@@ -1,7 +1,7 @@
 <div class="campanhas-item" (click)="abrirCamapnha()">
   <div class="barras" [class.itemSemDescricao]="campanha.isAdmin">
     <div class="barra barra-auxiliar"></div>
-    <div class="barra barra-progresso" [style]="toWidth(campanha.concluidas, campanha.ativas)" *ngIf="!isAdmin"></div>
+    <div class="barra barra-progresso" [style]="toWidth(campanha.concluidas, campanha.ativas)"></div>
     <div class="barra nome-campanha">
       <ion-icon name="star" slot="start" color="warning" *ngIf="toMinhaCampanha()"></ion-icon>
       {{ campanha.nome }}
