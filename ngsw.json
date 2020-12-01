@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606788119208,
+  "timestamp": 1606864075057,
   "index": "'https://brenofreire.github.io/3ofexba-app/'/index.html",
   "assetGroups": [
     {
@@ -225,8 +225,8 @@
         "'https://brenofreire.github.io/3ofexba-app/'/common-es2015.65184046fb331e974e37.js",
         "'https://brenofreire.github.io/3ofexba-app/'/common-es5.65184046fb331e974e37.js",
         "'https://brenofreire.github.io/3ofexba-app/'/index.html",
-        "'https://brenofreire.github.io/3ofexba-app/'/main-es2015.ab6ea0937363c5efc81c.js",
-        "'https://brenofreire.github.io/3ofexba-app/'/main-es5.ab6ea0937363c5efc81c.js",
+        "'https://brenofreire.github.io/3ofexba-app/'/main-es2015.2f59fb06891767d10fed.js",
+        "'https://brenofreire.github.io/3ofexba-app/'/main-es5.2f59fb06891767d10fed.js",
         "'https://brenofreire.github.io/3ofexba-app/'/manifest.webmanifest",
         "'https://brenofreire.github.io/3ofexba-app/'/polyfills-core-js-es2015.725dfb7ed216c15c72f5.js",
         "'https://brenofreire.github.io/3ofexba-app/'/polyfills-core-js-es5.725dfb7ed216c15c72f5.js",
@@ -497,9 +497,9 @@
     "'https://brenofreire.github.io/3ofexba-app/'/assets/shapes.svg": "638f87e27e6fc7ddfd6e6b262ea70d690f6c7011",
     "'https://brenofreire.github.io/3ofexba-app/'/common-es2015.65184046fb331e974e37.js": "a058744865d589167cd9531898c23926c08496dc",
     "'https://brenofreire.github.io/3ofexba-app/'/common-es5.65184046fb331e974e37.js": "4e5c202bfcb31f278679e44e5422f7036c73911c",
-    "'https://brenofreire.github.io/3ofexba-app/'/index.html": "aaead0c40accd6b44cb4cb249849cd4d0348ffbf",
-    "'https://brenofreire.github.io/3ofexba-app/'/main-es2015.ab6ea0937363c5efc81c.js": "eca272fa5039f15197a286f81d0016b6b890637c",
-    "'https://brenofreire.github.io/3ofexba-app/'/main-es5.ab6ea0937363c5efc81c.js": "5633d21c7dcac83e68437da0a70adf7446de9f4b",
+    "'https://brenofreire.github.io/3ofexba-app/'/index.html": "59b3de92e2004c7bf63d8cbce5bac5e4abe32fed",
+    "'https://brenofreire.github.io/3ofexba-app/'/main-es2015.2f59fb06891767d10fed.js": "2637da2655ee26a9c5e547c79fad1a1246b472d7",
+    "'https://brenofreire.github.io/3ofexba-app/'/main-es5.2f59fb06891767d10fed.js": "4905ac43c6a37de86cdafc6bc983165ec775ac4b",
     "'https://brenofreire.github.io/3ofexba-app/'/manifest.webmanifest": "9a088b7c4339228d1082e666ce105dc889bc180c",
     "'https://brenofreire.github.io/3ofexba-app/'/polyfills-core-js-es2015.725dfb7ed216c15c72f5.js": "458c56590505d9797763cd08b32ec23d8f0eb92b",
     "'https://brenofreire.github.io/3ofexba-app/'/polyfills-core-js-es5.725dfb7ed216c15c72f5.js": "fd3d4658f8e361e99ee69e332bc66926d99db0ea",
