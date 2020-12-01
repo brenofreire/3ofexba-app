@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606784371314,
+  "timestamp": 1606784822946,
   "index": "'https://brenofreire.github.io/3ofexba-app/'/index.html",
   "assetGroups": [
     {
@@ -497,7 +497,7 @@
     "'https://brenofreire.github.io/3ofexba-app/'/assets/shapes.svg": "638f87e27e6fc7ddfd6e6b262ea70d690f6c7011",
     "'https://brenofreire.github.io/3ofexba-app/'/common-es2015.54885eda9667c0ee8b55.js": "6a12b2fa36ea00df97be03ddd026719ee0e199c0",
     "'https://brenofreire.github.io/3ofexba-app/'/common-es5.54885eda9667c0ee8b55.js": "40dc0253355d8518926efd9349820446409b2f23",
-    "'https://brenofreire.github.io/3ofexba-app/'/index.html": "b48d0bb509e4e2d8646698be63f0328ac2280a15",
+    "'https://brenofreire.github.io/3ofexba-app/'/index.html": "a5acc278e9e525ef1d98f00023fc7ebad664dc26",
     "'https://brenofreire.github.io/3ofexba-app/'/main-es2015.ab6ea0937363c5efc81c.js": "eca272fa5039f15197a286f81d0016b6b890637c",
     "'https://brenofreire.github.io/3ofexba-app/'/main-es5.ab6ea0937363c5efc81c.js": "5633d21c7dcac83e68437da0a70adf7446de9f4b",
     "'https://brenofreire.github.io/3ofexba-app/'/manifest.webmanifest": "9a088b7c4339228d1082e666ce105dc889bc180c",
