@@ -32,17 +32,33 @@
       </ion-select-option>
     </ion-select>
 
-    <ion-item class="ion-no-padding input-ofex" lines="none">
+    <ion-item class="ion-no-padding input-ofex" lines="none" *ngIf="usuario.role === 'regional'">
       <ion-label>Ofex</ion-label>
       <ion-input [(ngModel)]="usuario.cargo" *ngIf="usuario.role === 'regional'" placeholder="Ofex" type="number">
       </ion-input>
     </ion-item>
 
+    <ion-select class="ion-no-padding" [(ngModel)]="usuario.cargo" okText="Selecionar" cancelText="Cancelar"
+      header="Tipo de usuário" placeholder="Selecione um cargo..." *ngIf="usuario.role === 'comum'">
+      <ion-select-option value="mc">
+        Mestre Conselheiro
+      </ion-select-option>
+      <ion-select-option value="esc">
+        Escrivão
+      </ion-select-option>
+      <ion-select-option value="tes">
+        Tesoureiro
+      </ion-select-option>
+      <ion-select-option value="hos">
+        Hospitaleiro
+      </ion-select-option>
+    </ion-select>
+
     <ion-input [(ngModel)]="usuario.password" placeholder="Mudar senha" [type]="tipoSenha"></ion-input>
 
     <ion-select class="ion-no-padding" [(ngModel)]="usuario.status" okText="Selecionar" cancelText="Cancelar"
       [interfaceOptions]="customAlertOptions">
-      <ion-select-option value="exluido">
+      <ion-select-option value="excluido">
         Excluído
       </ion-select-option>
       <ion-select-option value="ativo">
