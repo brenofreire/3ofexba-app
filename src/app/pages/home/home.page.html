@@ -12,11 +12,11 @@
 
     <app-loader *ngIf="!usuarioLogado || !campanhas" texto="Carregando informações de campanhas..."></app-loader>
 
-    <app-pseudo-title> 
+    <app-pseudo-title>
       <p [innerHTML]="toMeuCargo()"></p>
     </app-pseudo-title>
 
-    <ng-template [ngIf]="usuarioLogado && campanhas">
+    <ng-template [ngIf]="usuarioLogado && campanhas && usuarioLogado.capituloInfo && usuarioLogado.capituloInfo.nome">
       <div class="capitulo-info">
         <h2>Capítulo:</h2>
         <h1>
