@@ -1,4 +1,4 @@
-const ENV: 'DEV' | 'PROD' = 'DEV'
+const ENV: 'DEV' | 'PROD' = 'PROD'
 
 const CURRENT_URL_API = {
     DEV: 'http://127.0.0.1:3333/',
