@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { TarefasService } from 'src/app/services/tarefas.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { Component, Input, OnInit } from '@angular/core'
+import { ModalController } from '@ionic/angular'
+import { TarefasService } from 'src/app/services/tarefas.service'
+import { UtilsService } from 'src/app/services/utils.service'
 
 @Component({
   selector: 'app-capitulo-single',
@@ -12,11 +12,7 @@ export class CapituloSinglePage implements OnInit {
   @Input('capitulo') capitulo
   public campanhas: any[]
 
-  constructor(
-    private tarefasCtrl: TarefasService,
-    private utilsCtrl: UtilsService,
-    private modalCtrl: ModalController,
-  ) { }
+  constructor(private tarefasCtrl: TarefasService, private utilsCtrl: UtilsService, private modalCtrl: ModalController) {}
 
   async ngOnInit() {
     await this.getResumoCampanhas()

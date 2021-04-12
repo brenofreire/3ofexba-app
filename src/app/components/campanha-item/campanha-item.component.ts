@@ -45,7 +45,8 @@ export class CampanhaItemComponent implements OnInit {
     const modalCampanha = await this.modalCtrl.create({
       component: TarefasPage,
       componentProps: {
-        slugTarefa: this.campanha.slug
+        slugTarefa: this.campanha.slug,
+        idCapitulo: this.campanha.idCapitulo,
       }
     })
 

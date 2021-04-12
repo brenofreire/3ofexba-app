@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { ActionSheetController, AlertController } from '@ionic/angular';
-import { UsuarioService } from './usuario.service';
-import { UtilsService } from './utils.service';
+import { Injectable } from '@angular/core'
+import { ApiService } from './api.service'
+import { ActionSheetController, AlertController } from '@ionic/angular'
+import { UsuarioService } from './usuario.service'
+import { UtilsService } from './utils.service'
 import * as moment from 'moment'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TarefasService {
   private tarefa: any
@@ -17,7 +17,7 @@ export class TarefasService {
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private usuarioCtrl: UsuarioService,
-    private utilsCtrl: UtilsService,
+    private utilsCtrl: UtilsService
   ) {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(item => {
       this.usuario = item
@@ -34,9 +34,9 @@ export class TarefasService {
     }
   }
 
-  public async getTarefas(options?: { nomeTarefa }) {
+  public async getTarefas(options?: { nomeTarefa; idCapitulo }) {
     try {
-      const tarefas = await this.apiCtrl.get(`campanhas/${options.nomeTarefa}`)
+      const tarefas = await this.apiCtrl.get(`campanhas/${options.nomeTarefa}?capitulo=${options.idCapitulo}`)
 
       return tarefas
     } catch ({ error }) {
@@ -44,51 +44,57 @@ export class TarefasService {
     }
   }
 
-  public async actionSheetStatusTarefa(options: { tarefa, cargo?}) {
+  public async actionSheetStatusTarefa(options: { tarefa; cargo? }) {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'O que deseja fazer?',
-      buttons: [{
-        text: 'Mudar status da atividade',
-        handler: async () => {
-          this.tarefa = options.tarefa
+      buttons: [
+        {
+          text: 'Mudar status da atividade',
+          handler: async () => {
+            this.tarefa = options.tarefa
 
-          if (this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {
-            return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
-          }
-
-          const cargosPermitidosParaEditar: any[] = this.tarefa.cargo_tarefa
-
-          if (cargosPermitidosParaEditar === options.cargo && this.usuario.role !== 'admin') {
-            const alertMudarStatus = await this.alertMudarStatus({ tarefa: this.tarefa })
-
-            await alertMudarStatus.present()
-
-            const { data } = await alertMudarStatus.onDidDismiss()
-
-            if (data) {
-              options.tarefa.status = data.value
-
-              await this.mudarStatus(options)
-
-              await actionSheet.dismiss({
-                statusSlug: data.value,
-                statusNome: data.label,
-                statusCapitulo: data.statusCapitulo
-              })
+            if (this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {
+              return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
             }
-          } else {
-            return await this.utilsCtrl.mostrarToast('Você não tem permissão de alterar o status desta atividade!')
-          }
-        }
-      }, {
-        text: 'Pedir ajuda sobre atividade',
-        handler: () => {
-          console.log('>>> Abrir zap')
-        }
-      }, {
-        text: 'Cancelar',
-        role: 'cancel'
-      }]
+
+            const cargosPermitidosParaEditar: any[] = this.tarefa.cargo_tarefa
+
+            if (cargosPermitidosParaEditar === options.cargo && this.usuario.role !== 'admin') {
+              const alertMudarStatus = await this.alertMudarStatus({
+                tarefa: this.tarefa,
+              })
+
+              await alertMudarStatus.present()
+
+              const { data } = await alertMudarStatus.onDidDismiss()
+
+              if (data) {
+                options.tarefa.status = data.value
+
+                await this.mudarStatus(options)
+
+                await actionSheet.dismiss({
+                  statusSlug: data.value,
+                  statusNome: data.label,
+                  statusCapitulo: data.statusCapitulo,
+                })
+              }
+            } else {
+              return await this.utilsCtrl.mostrarToast('Você não tem permissão de alterar o status desta atividade!')
+            }
+          },
+        },
+        {
+          text: 'Pedir ajuda sobre atividade',
+          handler: () => {
+            console.log('>>> Abrir zap')
+          },
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+      ],
     })
     return actionSheet
   }
@@ -98,58 +104,83 @@ export class TarefasService {
       header: 'Mudar status da atividade',
       subHeader: 'O campo marcado, mostra o status da atividade atualmente',
       message: 'Somente admins poderão mudar o status da atividade para devolvida, recusada ou aprovada',
-      inputs: [{
-        type: 'radio',
-        label: 'Atividade não formulada',
-        value: 'atividade-nao-formulada',
-        checked: this.tarefa.statusCapitulo === 0,
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 0
-        })
-      }, {
-        type: 'radio',
-        label: 'Atividade realizada',
-        value: 'atividade-realizada',
-        checked: this.tarefa.statusCapitulo === 1,
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 1,
-        })
-      }, {
-        type: 'radio',
-        label: 'Atividade enviada',
-        value: 'atividade-enviada',
-        checked: this.tarefa.statusCapitulo === 2,
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 2,
-        })
-      }, {
-        type: 'radio',
-        label: 'Atividade devolvida',
-        value: 'atividade-devolvida',
-        checked: this.tarefa.statusCapitulo === 3,
-        disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 3
-        })
-      }, {
-        type: 'radio',
-        label: 'Atividade recusada',
-        value: 'atividade-recusada',
-        checked: this.tarefa.statusCapitulo === 4,
-        disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 4
-        })
-      }, {
-        type: 'radio',
-        label: 'Atividade aprovada',
-        value: 'atividade-aprovada',
-        checked: this.tarefa.statusCapitulo === 5,
-        disabled: this.usuario.role !== 'admin',
-        handler: async (data) => await alertMudarStatus.dismiss({
-          ...data, statusCapitulo: 5
-        })
-      }]
+      inputs: [
+        {
+          type: 'radio',
+          label: 'Atividade não formulada',
+          value: 'atividade-nao-formulada',
+          checked: this.tarefa.statusCapitulo === 0,
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 0,
+            })
+          }
+        },
+        {
+          type: 'radio',
+          label: 'Atividade realizada',
+          value: 'atividade-realizada',
+          checked: this.tarefa.statusCapitulo === 1,
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 1,
+            })
+          }
+        },
+        {
+          type: 'radio',
+          label: 'Atividade enviada',
+          value: 'atividade-enviada',
+          checked: this.tarefa.statusCapitulo === 2,
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 2,
+            })
+          }
+        },
+        {
+          type: 'radio',
+          label: 'Atividade devolvida',
+          value: 'atividade-devolvida',
+          checked: this.tarefa.statusCapitulo === 3,
+          disabled: this.usuario.role !== 'admin',
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 3,
+            })
+          }
+        },
+        {
+          type: 'radio',
+          label: 'Atividade recusada',
+          value: 'atividade-recusada',
+          checked: this.tarefa.statusCapitulo === 4,
+          disabled: this.usuario.role !== 'admin',
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 4,
+            })
+          }
+        },
+        {
+          type: 'radio',
+          label: 'Atividade aprovada',
+          value: 'atividade-aprovada',
+          checked: this.tarefa.statusCapitulo === 5,
+          disabled: this.usuario.role !== 'admin',
+          async handler(data) {
+            return await alertMudarStatus.dismiss({
+              ...data,
+              statusCapitulo: 5,
+            })
+          }
+        },
+      ],
     })
 
     return alertMudarStatus
@@ -168,7 +199,7 @@ export class TarefasService {
       } else {
         await this.apiCtrl.post(`tarefas/editar`, {
           idTarefa: options.tarefa.id,
-          status: options.tarefa.status
+          status: options.tarefa.status,
         })
 
         await this.utilsCtrl.mostrarToast('Atividade atualizada com sucesso')
@@ -180,7 +211,7 @@ export class TarefasService {
     }
   }
 
-  public async enviarTarefa(options: { slugCampanha, tipoCampanha, status? }) {
+  public async enviarTarefa(options: { slugCampanha; tipoCampanha; status? }) {
     try {
       const criaTarefa = await this.apiCtrl.post('tarefas', options)
 
@@ -190,7 +221,7 @@ export class TarefasService {
     }
   }
 
-  public async getCampanhasAdmin(options: { offset, termoBusca }) {
+  public async getCampanhasAdmin(options: { offset; termoBusca }) {
     try {
       const url = `admin/campanhas?offset=${options.offset}&termoBusca${options.termoBusca}`
       const campanhas = await this.apiCtrl.get(url)
@@ -205,7 +236,7 @@ export class TarefasService {
     }
   }
 
-  public async editarCriarTarefa(options: { nome, tipo, cargo_tarefa, data_entrega, data_final_semestre, status, }) {
+  public async editarCriarTarefa(options: { nome; tipo; cargo_tarefa; data_entrega; data_final_semestre; status }) {
     try {
       options.data_entrega = moment(options.data_entrega).endOf('day').format('YYYY-MM-DD HH:mm:ss')
       options.data_final_semestre = moment(options.data_final_semestre).endOf('day').format('YYYY-MM-DD HH:mm:ss')
