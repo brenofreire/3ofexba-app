@@ -59,7 +59,7 @@ export class TarefasService {
 
             const cargosPermitidosParaEditar: any[] = this.tarefa.cargo_tarefa
 
-            if (cargosPermitidosParaEditar === options.cargo && this.usuario.role !== 'admin') {
+            if (cargosPermitidosParaEditar === options.cargo || this.usuario.role === 'admin') {
               const alertMudarStatus = await this.alertMudarStatus({
                 tarefa: this.tarefa,
               })
