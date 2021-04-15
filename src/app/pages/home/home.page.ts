@@ -67,10 +67,12 @@ export class HomePage implements OnInit {
   }
 
   public async abrirPage(modalName) {
-    if (this.isAdmin) {
-      await this.routerCtrl.navigateByUrl(modalName)
-    } else {
+    if (!this.isAdmin && modalName === 'acompanhamento') {
       window.open('https://api.whatsapp.com/send?phone=' + 557391043353)
+
+      return true
     }
+
+    await this.routerCtrl.navigateByUrl(modalName)
   }
 }
