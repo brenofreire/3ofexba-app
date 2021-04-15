@@ -87,7 +87,7 @@ export class TarefasService {
         {
           text: 'Pedir ajuda sobre atividade',
           handler: () => {
-            console.log('>>> Abrir zap')
+            window.open('https://api.whatsapp.com/send?phone=' + 557391043353)
           },
         },
         {
@@ -115,7 +115,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 0,
             })
-          }
+          },
         },
         {
           type: 'radio',
@@ -127,7 +127,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 1,
             })
-          }
+          },
         },
         {
           type: 'radio',
@@ -139,7 +139,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 2,
             })
-          }
+          },
         },
         {
           type: 'radio',
@@ -152,7 +152,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 3,
             })
-          }
+          },
         },
         {
           type: 'radio',
@@ -165,7 +165,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 4,
             })
-          }
+          },
         },
         {
           type: 'radio',
@@ -178,7 +178,7 @@ export class TarefasService {
               ...data,
               statusCapitulo: 5,
             })
-          }
+          },
         },
       ],
     })

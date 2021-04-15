@@ -21,7 +21,7 @@ export class CampanhaItemComponent implements OnInit {
   ngOnInit() {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(item => {
       this.usuarioLogado = item
-      this.isAdmin = this.usuarioLogado.role === 'admin'
+      this.isAdmin = this.usuarioLogado?.role === 'admin'
     })
   }
 
