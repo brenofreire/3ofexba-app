@@ -6,7 +6,7 @@
 
 <ion-content>
   <div class="avatar-wrapper">
-    <app-button-demolay icon="demolay"></app-button-demolay>
+    <app-button-dm icon="dm"></app-button-dm>
   </div>
 
   <div class="agostinho-wrapper" *ngIf="mensagensAgostinho">
@@ -16,21 +16,20 @@
       <ng-template ngFor let-mensagem [ngForOf]="mensagensAgostinho">
         <div class="mensagem-item">
           <div class="avatar-mensagem">
-            <app-button-demolay icon="demolay"></app-button-demolay>
+            <app-button-dm icon="dm"></app-button-dm>
           </div>
-          <div class="mensagem-box">
-            {{ mensagem.mensagem }}
-          </div>
+          <div class="mensagem-box">{{ mensagem.mensagem }}</div>
         </div>
         <span class="mensagem-hora">{{ mensagem.created_at | date:'HH:mm dd/MM/yyyy ' }}</span>
       </ng-template>
     </div>
 
-    <ion-infinite-scroll 
-      threshold="100px" *ngIf="mensagensAgostinho && mensagensAgostinho.length >= 10" 
-      (ionInfinite)="carregarMaisMensagens($event)">
-      <ion-infinite-scroll-content loadingSpinner="dots">
-      </ion-infinite-scroll-content>
+    <ion-infinite-scroll
+      threshold="100px"
+      *ngIf="mensagensAgostinho && mensagensAgostinho.length >= 10"
+      (ionInfinite)="carregarMaisMensagens($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="dots"> </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
 </ion-content>

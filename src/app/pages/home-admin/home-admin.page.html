@@ -9,43 +9,38 @@
 
 <ion-content>
   <app-content>
-
     <app-loader *ngIf="!usuarioLogado" texto="Carregando informações de admin..."></app-loader>
 
-    <app-pseudo-title>
-      Salve meu <b>admin</b>! Se liga só que é hora de trabalhar, escolha a região que quer manusear ;)
-    </app-pseudo-title>
+    <app-pseudo-title> Salve meu <b>admin</b>! Se liga só que é hora de trabalhar, escolha a região que quer manusear ;) </app-pseudo-title>
 
     <ng-template [ngIf]="usuarioLogado">
-      <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo...">
-
-      </ion-searchbar>
+      <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo..."> </ion-searchbar>
 
       <!-- Criar comp -->
       <div class="seletor-inicial">
         <div class="item-acao" (click)="selecionarRegiao()">
-          <div class=item-icone>
+          <div class="item-icone">
             <ion-icon name="navigate-circle-outline"></ion-icon>
           </div>
           <span>Selecionar região</span>
         </div>
 
         <div class="item-acao">
-          <div class=item-icone>
+          <div class="item-icone">
             <ion-icon name="duplicate-outline"></ion-icon>
           </div>
           <span>Adicionar ou editar organização</span>
         </div>
 
         <div class="item-acao" (click)="abrirCriacaoEdicaoCampanha()">
-          <div class=item-icone>
+          <div class="item-icone">
             <ion-icon name="flag-outline"></ion-icon>
           </div>
           <span>Central de atividades</span>
         </div>
 
         <div class="item-acao" (click)="abrirEdicaoCadastro()">
-          <div class=item-icone>
+          <div class="item-icone">
             <ion-icon name="key-outline"></ion-icon>
           </div>
           <span>Central de cadastros</span>
@@ -67,13 +62,8 @@
       </div>
 
       <app-botoes-acao>
-        <!-- <app-button-demolay icon="demolay" texto="Configurações" tamanho="80" (click)="abrirPage('agostinho')">
-        </app-button-demolay> -->
-
-        <app-button-demolay icon="acompanhamento" texto="Postar" tamanho="80" (click)="abrirPage('acompanhamento')">
-        </app-button-demolay>
+        <app-button-dm icon="acompanhamento" texto="Postar" tamanho="80" (click)="abrirPage('acompanhamento')"> </app-button-dm>
       </app-botoes-acao>
-
     </ng-template>
   </app-content>
 </ion-content>

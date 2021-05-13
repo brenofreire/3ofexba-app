@@ -1,10 +1,9 @@
 <ion-content>
   <section id="forms-login-cadastro">
     <div class="login-wrapper">
-      <app-button-demolay icon="demolay" *ngIf="!isCadastro"></app-button-demolay> 
+      <app-button-dm icon="dm" *ngIf="!isCadastro"></app-button-dm>
 
       <div class="form-login-cadastro">
-
         <div class="input-azul" *ngIf="isCadastro">
           <ion-label>Nome</ion-label>
           <ion-input [(ngModel)]="informacoesUsuario.nome"></ion-input>
@@ -18,7 +17,7 @@
           <ion-input [(ngModel)]="informacoesUsuario.password" type="password"></ion-input>
         </div>
         <div class="input-azul" *ngIf="isCadastro">
-          <ion-label>ID Demolay</ion-label>
+          <ion-label>ID</ion-label>
           <ion-input [(ngModel)]="informacoesUsuario.id_demolay"></ion-input>
         </div>
         <div class="input-azul" *ngIf="isCadastro">
@@ -27,13 +26,12 @@
         </div>
 
         <ion-fab-button (click)="login()" *ngIf="!isCadastro">
-          <ion-icon name="play"></ion-icon>          
+          <ion-icon name="play"></ion-icon>
         </ion-fab-button>
         <ion-button *ngIf="isCadastro" expand="block" fill="outline" (click)="cadastro()">
           <ion-icon name="create" *ngIf="isCadastro" slot="start"></ion-icon>
           <ion-label *ngIf="isCadastro">Cadastrar</ion-label>
         </ion-button>
-
       </div>
       <div class="form-opcoes">
         <ion-button fill="clear" *ngIf="!isCadastro" (click)="isCadastro = true">
