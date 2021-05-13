@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { Component, OnInit } from '@angular/core'
+import { ModalController } from '@ionic/angular'
+import { UsuarioService } from 'src/app/services/usuario.service'
+import { UtilsService } from 'src/app/services/utils.service'
 
 @Component({
   selector: 'app-editar-cadastro',
@@ -15,13 +15,9 @@ export class EditarCadastroPage implements OnInit {
   public filtroStatusUsuario = ''
   public deveMostrarInfiniteScroll = false
 
-  constructor(
-    private usuariosCtrl: UsuarioService,
-    private modalCtrl: ModalController,
-    private utilsCtrl: UtilsService,
-  ) { }
+  constructor(private usuariosCtrl: UsuarioService, private modalCtrl: ModalController, private utilsCtrl: UtilsService) {}
 
-  async ngOnInit() { 
+  async ngOnInit() {
     await this.getUsuarios()
   }
 
@@ -31,27 +27,19 @@ export class EditarCadastroPage implements OnInit {
     try {
       const usuariosCarregados = await this.usuariosCtrl.getUsuariosAdmin({
         termoBusca: this.termoBusca,
-        offset: !zerarLista ? this.usuarios && this.usuarios.length || 0 : 0,
-        filtroStatusUsuario: this.filtroStatusUsuario
+        offset: !zerarLista ? (this.usuarios && this.usuarios.length) || 0 : 0,
+        filtroStatusUsuario: this.filtroStatusUsuario,
       })
 
-      if(zerarLista) {
+      if (zerarLista) {
         this.usuarios = usuariosCarregados
       } else {
         this.usuarios.push(...usuariosCarregados)
       }
 
-      this.deveMostrarInfiniteScroll = !!(
-        usuariosCarregados && usuariosCarregados.length
-        && usuariosCarregados.length >= 10
-      )
-
-      console.log(this.deveMostrarInfiniteScroll)
+      this.deveMostrarInfiniteScroll = !!(usuariosCarregados && usuariosCarregados.length && usuariosCarregados.length >= 10)
     } catch (error) {
-      await this.utilsCtrl.mostrarAlert(
-        'Ops... Houve um erro ao listar usuários', 
-        'Tente novamente mais tarde'
-      )
+      await this.utilsCtrl.mostrarAlert('Ops... Houve um erro ao listar usuários', 'Tente novamente mais tarde')
       await this.modalCtrl.dismiss()
     } finally {
       this.carregando = false

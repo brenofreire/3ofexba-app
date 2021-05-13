@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core'
   templateUrl: './button-dm.component.html',
   styleUrls: ['./button-dm.component.scss'],
 })
-export class ButtonDemolayComponent implements OnInit {
+export class ButtonDmComponent implements OnInit {
   @Input('icon') icon: 'dm' | 'acompanhamento'
   @Input('texto') texto: string
   @Input('tamanho') tamanho: string

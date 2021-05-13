@@ -4,7 +4,7 @@ import { LoaderComponent } from './loader/loader.component'
 import { FormsModule } from '@angular/forms'
 import { IonicModule } from '@ionic/angular'
 import { CampanhaItemComponent } from './campanha-item/campanha-item.component'
-import { ButtonDemolayComponent } from './button-dm/button-dm.component'
+import { ButtonDmComponent } from './button-dm/button-dm.component'
 import { TarefaItemComponent } from './tarefa-item/tarefa-item.component'
 import { BotoesAcaoComponent } from './botoes-acao/botoes-acao.component'
 import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component'
@@ -16,7 +16,7 @@ import { ContentComponent } from './content-dm/content.component'
   declarations: [
     LoaderComponent,
     CampanhaItemComponent,
-    ButtonDemolayComponent,
+    ButtonDmComponent,
     TarefaItemComponent,
     ContentComponent,
     BotoesAcaoComponent,
@@ -27,7 +27,7 @@ import { ContentComponent } from './content-dm/content.component'
   entryComponents: [
     LoaderComponent,
     CampanhaItemComponent,
-    ButtonDemolayComponent,
+    ButtonDmComponent,
     TarefaItemComponent,
     ContentComponent,
     BotoesAcaoComponent,
@@ -39,7 +39,7 @@ import { ContentComponent } from './content-dm/content.component'
   exports: [
     LoaderComponent,
     CampanhaItemComponent,
-    ButtonDemolayComponent,
+    ButtonDmComponent,
     TarefaItemComponent,
     ContentComponent,
     BotoesAcaoComponent,
