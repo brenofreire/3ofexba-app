@@ -5,6 +5,7 @@ import { UtilsService } from 'src/app/services/utils.service'
 import { ModalController } from '@ionic/angular'
 import { AgostinhoPage } from '../agostinho/agostinho.page'
 import { Router } from '@angular/router'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-home',
@@ -68,7 +69,7 @@ export class HomePage implements OnInit {
 
   public async abrirPage(modalName) {
     if (!this.isAdmin && modalName === 'acompanhamento') {
-      window.open('https://api.whatsapp.com/send?phone=' + 557391043353)
+      window.open('https://api.whatsapp.com/send?phone=' + environment.phone)
 
       return true
     }

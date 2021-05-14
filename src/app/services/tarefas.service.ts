@@ -4,6 +4,7 @@ import { ActionSheetController, AlertController } from '@ionic/angular'
 import { UsuarioService } from './usuario.service'
 import { UtilsService } from './utils.service'
 import * as moment from 'moment'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -87,7 +88,7 @@ export class TarefasService {
         {
           text: 'Pedir ajuda sobre atividade',
           handler: () => {
-            window.open('https://api.whatsapp.com/send?phone=' + 557391043353)
+            window.open('https://api.whatsapp.com/send?phone=' + environment.phone)
           },
         },
         {
