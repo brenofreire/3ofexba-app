@@ -9,29 +9,27 @@
 </ion-header>
 
 <ion-content>
-
   <app-content>
     <ng-template ngFor let-campanha [ngForOf]="campanhas">
       <!-- Criar comp -->
       <div class="campanha-item-admin" (click)="abrirEditarCriarTarefa(campanha)">
-        <div class="nome-campanha">
-          {{ campanha.nome }}
-        </div>
+        <div class="nome-campanha">{{ campanha.nome }}</div>
         <div class="campanha-info">
-          <span class="campanha-badge-cargos white">
-            {{ campanha.tipoLabel }}
-          </span>
-          <span class="campanha-badge-cargos">
-            {{ cargosEnum[campanha.cargo_tarefa] }}
-          </span>
-          <span class="campanha-badge-cargos">
-            {{ campanha.data_entrega | date: 'dd/MM/yyyy' }}
-          </span>
+          <span class="campanha-badge-cargos white"> {{ campanha.tipoLabel }} </span>
+          <span class="campanha-badge-cargos"> {{ cargosEnum[campanha.cargo_tarefa] }} </span>
+          <span class="campanha-badge-cargos"> {{ campanha.data_entrega | date: 'dd/MM/yyyy' }} </span>
         </div>
       </div>
     </ng-template>
-  </app-content>
 
+    <ion-infinite-scroll
+      threshold="100px"
+      *ngIf="campanhas && campanhas.length >= 10 && aindaTemResultadoPraCarregar"
+      (ionInfinite)="carregarMaisCampanhas($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </app-content>
 </ion-content>
 
 <ion-footer class="ion-no-border">
