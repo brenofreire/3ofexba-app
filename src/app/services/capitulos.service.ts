@@ -1,18 +1,13 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { UsuarioService } from './usuario.service';
-import { UtilsService } from './utils.service';
+import { Injectable } from '@angular/core'
+import { ApiService } from './api.service'
+import { UsuarioService } from './usuario.service'
+import { UtilsService } from './utils.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CapitulosService {
-
-  constructor(
-    private apiCtrl: ApiService,
-    private usuarioCtrl: UsuarioService,
-    private utilsCtrl: UtilsService,
-  ) { }
+  constructor(private apiCtrl: ApiService, private usuarioCtrl: UsuarioService, private utilsCtrl: UtilsService) {}
 
   async getRegioes() {
     try {
@@ -24,10 +19,20 @@ export class CapitulosService {
     }
   }
 
-  async getCapitulos(options: { ofex, termoBusca, offset, }) {
+  async getCapitulos(options: { ofex; termoBusca; offset }) {
     try {
       const url = `capitulos?ofex=${options.ofex}&termoBusca=${options.termoBusca}&offset=${options.offset}`
       const capitulos = await this.apiCtrl.get(url)
+
+      return capitulos
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async adicionarOuEditarOrganizacao(capitulo) {
+    try {
+      const capitulos = await this.apiCtrl.post('capitulos', capitulo)
 
       return capitulos
     } catch (error) {

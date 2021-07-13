@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { AcompanhamentoPage } from '../acompanhamento/acompanhamento.page';
-import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page';
-import { EditarCadastroPage } from './editar-cadastro/editar-cadastro.page';
-import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page';
+import { Component, OnInit } from '@angular/core'
+import { ModalController } from '@ionic/angular'
+import { UsuarioService } from 'src/app/services/usuario.service'
+import { AcompanhamentoPage } from '../acompanhamento/acompanhamento.page'
+import { AdicionarCriarOrganizacaoPage } from './adicionar-criar-organizacao/adicionar-criar-organizacao.page'
+import { CriarEditarTarefaPage } from '../tarefas/criar-editar-tarefa/criar-editar-tarefa.page'
+import { EditarCadastroPage } from './editar-cadastro/editar-cadastro.page'
+import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page'
 
 @Component({
   selector: 'app-home-admin',
@@ -14,10 +15,7 @@ import { SelecionarRegiaoPage } from './selecionar-regiao/selecionar-regiao.page
 export class HomeAdminPage implements OnInit {
   public usuarioLogado: any
 
-  constructor(
-    private usuarioCtrl: UsuarioService,
-    private modalCtrl: ModalController,
-  ) { }
+  constructor(private usuarioCtrl: UsuarioService, private modalCtrl: ModalController) {}
 
   ngOnInit() {
     this.usuarioCtrl.getUsuariologadoObservable().subscribe(usuarioLogado => {
@@ -57,11 +55,15 @@ export class HomeAdminPage implements OnInit {
 
   public async abrirPage(nomeDaPagina: 'acompanhamento') {
     const modaisPossiveis = {
-      acompanhamento: AcompanhamentoPage
+      acompanhamento: AcompanhamentoPage,
     }
 
     await this.abrirModal({
-      component: modaisPossiveis[nomeDaPagina]
+      component: modaisPossiveis[nomeDaPagina],
     })
+  }
+
+  async adicionarOuEditarOrganizacao() {
+    await this.abrirModal({ component: AdicionarCriarOrganizacaoPage })
   }
 }

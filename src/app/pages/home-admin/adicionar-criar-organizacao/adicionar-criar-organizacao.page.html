@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Central de Capítulos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-content>
+    <div>
+      <ion-input [(ngModel)]="capituloInfo.nome" placeholder="Nome"></ion-input>
+      <ion-input [(ngModel)]="capituloInfo.numero" type="number" placeholder="Número do Capítulo"></ion-input>
+      <ion-input [(ngModel)]="capituloInfo.sigla" placeholder="Email do usuário"></ion-input>
+      <ion-input [(ngModel)]="capituloInfo.ofex" placeholder="CID do usuário"></ion-input>
+
+      <ion-button expand (click)="salvarInfo()">Salvar</ion-button>
+    </div>
+  </app-content>
+</ion-content>
