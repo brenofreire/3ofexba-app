@@ -210,7 +210,15 @@ export class TarefasService {
 
       return options.tarefa.status
     } catch (error) {
-      await this.utilsCtrl.mostrarAlert('Houve um erro ao mudar status da atividade', 'Tente novamente mais tarde')
+      const [mensagem, dica]: any[] = error && error.mensagem
+      if(mensagem) {
+        await this.utilsCtrl.mostrarAlert(mensagem, dica)
+
+      } else {
+        await this.utilsCtrl.mostrarAlert('Houve um erro ao mudar status da atividade', 'Tente novamente mais tarde')
+      }      
+
+      throw error
     }
   }
 

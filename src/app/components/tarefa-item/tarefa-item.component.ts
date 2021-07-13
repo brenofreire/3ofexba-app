@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ApplicationRef } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TarefasService } from 'src/app/services/tarefas.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -16,7 +16,7 @@ export class TarefaItemComponent implements OnInit {
   constructor(
     private usuarioCtrl: UsuarioService,
     private tarefasCtrl: TarefasService,
-    private utilsCtrl: UtilsService,
+    private cd: ApplicationRef
   ) { }
 
   ngOnInit() {
@@ -41,7 +41,8 @@ export class TarefaItemComponent implements OnInit {
       if(situacaoDoCapituloNaAtividade) {
         this.tarefa.statusCapituloSlug = situacaoDoCapituloNaAtividade.statusSlug 
         this.tarefa.statusCapituloLabel = situacaoDoCapituloNaAtividade.statusNome 
-        this.tarefa.statusCapitulo = situacaoDoCapituloNaAtividade.statusCapitulo 
+        this.tarefa.statusCapitulo = situacaoDoCapituloNaAtividade.statusCapitulo
+        this.cd.tick()
       }
     } catch (error) {
       throw error
