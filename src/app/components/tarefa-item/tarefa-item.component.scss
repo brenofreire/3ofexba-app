@@ -31,8 +31,10 @@
   }
   .tarefa-info {
     display: flex;
-    gap: 8px;
     align-items: center;
+    small {
+      margin-left: 8px;
+    }
     span {
       display: flex;
       align-items: center;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalController } from '@ionic/angular';
 import { TarefasPage } from 'src/app/pages/home/tarefas/tarefas.page';
@@ -10,6 +10,8 @@ import { TarefasPage } from 'src/app/pages/home/tarefas/tarefas.page';
 })
 export class CampanhaItemComponent implements OnInit {
   @Input('campanha') campanha
+  @Output() dismissItem = new EventEmitter()
+
   public usuarioLogado
   public isAdmin = false
 
@@ -48,6 +50,10 @@ export class CampanhaItemComponent implements OnInit {
         slugTarefa: this.campanha.slug,
         idCapitulo: this.campanha.idCapitulo,
       }
+    })
+
+    modalCampanha.onDidDismiss().then(() => {
+      this.dismissItem.emit(true)
     })
 
     setTimeout(async () => {

@@ -23,7 +23,7 @@
 
       <div class="campanhas">
         <ng-template ngFor let-campanha [ngForOf]="campanhas">
-          <app-campanha-item [campanha]="campanha"></app-campanha-item>
+          <app-campanha-item [campanha]="campanha" (dismissItem)="getResumoCampanhas()"></app-campanha-item>
         </ng-template>
       </div>
 

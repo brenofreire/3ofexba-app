@@ -194,6 +194,8 @@ export class TarefasService {
           slugCampanha: options.tarefa.slug,
           tipoCampanha: options.tarefa.tipo,
           status: options.tarefa.status,
+          idCapitulo: options.tarefa.idCapitulo,
+          cargo: options.tarefa.cargo_tarefa
         })
 
         await this.utilsCtrl.mostrarToast('Atividade enviada com sucesso')
@@ -212,7 +214,7 @@ export class TarefasService {
     }
   }
 
-  public async enviarTarefa(options: { slugCampanha; tipoCampanha; status? }) {
+  public async enviarTarefa(options: { slugCampanha; tipoCampanha; status?, idCapitulo, cargo }) {
     try {
       const criaTarefa = await this.apiCtrl.post('tarefas', options)
 
