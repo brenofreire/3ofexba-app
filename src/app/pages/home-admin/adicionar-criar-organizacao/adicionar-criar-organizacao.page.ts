@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core'
 import { ModalController } from '@ionic/angular'
 import { CapitulosService } from 'src/app/services/capitulos.service'
 import { UtilsService } from 'src/app/services/utils.service'
@@ -17,8 +17,14 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
   }
   organizacoes: any = []
   carregandoOrgs: boolean = false
+  termoBusca: any = ''
 
-  constructor(private capitulosCtrl: CapitulosService, private utilsCtrl: UtilsService, private modalCtrl: ModalController) {
+  constructor(
+    private ref: ChangeDetectorRef,
+    private capitulosCtrl: CapitulosService,
+    private utilsCtrl: UtilsService,
+    private modalCtrl: ModalController
+  ) {
     this.organizacao = this.factoryCapituloInfo('', null, '', null)
   }
 
@@ -56,14 +62,21 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
 
   async getOrganizacoes() {
     this.carregandoOrgs = true
+    this.organizacoes = []
 
     try {
-      this.organizacoes = await this.capitulosCtrl.getCapitulosAdmin()
+      this.ref.detectChanges()
+
+      this.organizacoes = await this.capitulosCtrl.getCapitulosAdmin({ termoBusca: this.termoBusca })
     } catch (error) {
       await this.utilsCtrl.mostrarAlert('Houve um erro ao buscar organizações', 'Tente novamente mais tarde')
     } finally {
       this.carregandoOrgs = false
     }
+  }
+
+  debounceSearch() {
+    this.utilsCtrl.debounce(() => this.getOrganizacoes(), 500)()
   }
 
   get temOrganizacoes() {

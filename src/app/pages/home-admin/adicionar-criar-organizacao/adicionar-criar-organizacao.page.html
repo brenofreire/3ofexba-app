@@ -10,7 +10,7 @@
 
 <ion-content>
   <div class="org-wrapper">
-    <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo..." [(ngModel)]="termoBusca" (ionChange)="getOrganizacoes(true)">
+    <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo..." [(ngModel)]="termoBusca" (ionChange)="debounceSearch()">
     </ion-searchbar>
 
     <ion-input [(ngModel)]="organizacao.nome" placeholder="Nome"></ion-input>
@@ -22,8 +22,8 @@
 
     <app-loader *ngIf="carregandoOrgs" texto="Carregando informações..."></app-loader>
 
-    <ng-template [ngIf]="temOrganizacoes" ngFor let-organizacao [ngForOf]="organizacoes">
-      <app-capitulo-item [organizacao]="organizacao" (click)="setarOrgManuseada(organizacao)"></app-capitulo-item>
+    <ng-template [ngIf]="temOrganizacoes" ngFor let-org [ngForOf]="organizacoes">
+      <app-capitulo-item [capitulo]="org" (click)="setarOrgManuseada(org)"></app-capitulo-item>
     </ng-template>
   </div>
 </ion-content>

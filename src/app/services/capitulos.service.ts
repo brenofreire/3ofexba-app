@@ -40,9 +40,9 @@ export class CapitulosService {
     }
   }
 
-  async getCapitulosAdmin() {
+  async getCapitulosAdmin({ termoBusca }) {
     try {
-      const organizacoes = await this.apiCtrl.get('capitulos-admin')
+      const organizacoes = await this.apiCtrl.post('capitulos/todos', { termoBusca })
 
       return organizacoes
     } catch (error) {
