@@ -10,6 +10,11 @@
 
 <ion-content>
   <div class="org-wrapper">
+    <ion-button expand="block" fill="clear" (click)="limparOrgManuseada()" *ngIf="frozenOrganizacao">
+      <span>Editando: {{ frozenOrganizacao }}</span>
+      <ion-icon slot="end" name="close-circle" color="danger"></ion-icon>
+    </ion-button>
+
     <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo..." [(ngModel)]="termoBusca" (ionChange)="debounceSearch()">
     </ion-searchbar>
 
@@ -22,8 +27,10 @@
 
     <app-loader *ngIf="carregandoOrgs" texto="Carregando informações..."></app-loader>
 
-    <ng-template [ngIf]="temOrganizacoes" ngFor let-org [ngForOf]="organizacoes">
-      <app-capitulo-item [capitulo]="org" (click)="setarOrgManuseada(org)"></app-capitulo-item>
+    <ng-template [ngIf]="temOrganizacoes">
+      <div *ngFor="let org of organizacoes">
+        <app-capitulo-item [capitulo]="org" (click)="setarOrgManuseada(org)"></app-capitulo-item>
+      </div>
     </ng-template>
   </div>
 </ion-content>

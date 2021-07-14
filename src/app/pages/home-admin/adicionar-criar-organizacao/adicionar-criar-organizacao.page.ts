@@ -18,6 +18,7 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
   organizacoes: any = []
   carregandoOrgs: boolean = false
   termoBusca: any = ''
+  frozenOrganizacao: any
 
   constructor(
     private ref: ChangeDetectorRef,
@@ -43,7 +44,8 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
 
       this.utilsCtrl.mostrarAlert('Ação realizada com sucesso!', '')
 
-      this.organizacao = this.factoryCapituloInfo('', null, '', null)
+      this.limparOrgManuseada()
+      this.setOrganizacoes([])
     } catch (error) {
       const mensagem = (error && error.mensagem) || 'Houve um erro ao salvar informações'
       this.utilsCtrl.mostrarAlert(mensagem, 'Tente novamente mais tarde')
@@ -57,7 +59,12 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
   }
 
   setarOrgManuseada(organizacao) {
-    this.organizacao = organizacao
+    this.organizacao = JSON.parse(JSON.stringify(organizacao))
+    this.setFrozenOrganizacao(organizacao.nome)
+  }
+
+  setFrozenOrganizacao(nome) {
+    this.frozenOrganizacao = nome
   }
 
   async getOrganizacoes() {
@@ -67,12 +74,18 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
     try {
       this.ref.detectChanges()
 
-      this.organizacoes = await this.capitulosCtrl.getCapitulosAdmin({ termoBusca: this.termoBusca })
+      const organizacoes = await this.capitulosCtrl.getCapitulosAdmin({ termoBusca: this.termoBusca })
+
+      this.setOrganizacoes(organizacoes)
     } catch (error) {
       await this.utilsCtrl.mostrarAlert('Houve um erro ao buscar organizações', 'Tente novamente mais tarde')
     } finally {
       this.carregandoOrgs = false
     }
+  }
+
+  setOrganizacoes(organizacoes) {
+    this.organizacoes = JSON.parse(JSON.stringify(organizacoes))
   }
 
   debounceSearch() {
@@ -81,5 +94,10 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
 
   get temOrganizacoes() {
     return this.organizacoes && this.organizacoes.length
+  }
+
+  limparOrgManuseada() {
+    this.setarOrgManuseada({})
+    this.setFrozenOrganizacao('')
   }
 }
