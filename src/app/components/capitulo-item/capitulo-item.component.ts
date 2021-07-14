@@ -6,7 +6,11 @@ import { Component, Input, OnInit } from '@angular/core'
   styleUrls: ['./capitulo-item.component.scss'],
 })
 export class CapituloItemComponent implements OnInit {
-  @Input() capitulo = {}
+  @Input() capitulo = {
+    nome: '',
+    sigle: '',
+    numero: '',
+  }
 
   constructor() {}
 
