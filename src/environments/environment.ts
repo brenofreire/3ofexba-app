@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   phone: 5573991202216,
   version: '0.4.0',
+  api: 'http://127.0.0.1:3333/',
 }
 
 /*

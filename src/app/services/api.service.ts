@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Storage } from '@ionic/storage'
+import { environment } from 'src/environments/environment'
 
-import { CURRENT_URL_API } from './config/api.config'
-
+const CURRENT_URL_API = environment.api
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private JWTRefreshedToken = 'jwt_expired_token_refreshed'
 
-  constructor(
-    private http: HttpClient, 
-    private storage: Storage,
-  ) {}
+  constructor(private http: HttpClient, private storage: Storage) {}
 
   async relogar(novoToken) {
     await this.storage.set('usuario-token', novoToken)
@@ -23,9 +20,11 @@ export class ApiService {
     return new Promise(async (response, error) => {
       const headersOptions = await this.montarHeader('post', token)
 
-      this.http.post(CURRENT_URL_API + url, body, { headers: headersOptions })
-        .subscribe(result => { response(result) },
-        async (err) => {
+      this.http.post(CURRENT_URL_API + url, body, { headers: headersOptions }).subscribe(
+        result => {
+          response(result)
+        },
+        async err => {
           if (err && err.error && this.JWTRefreshedToken == err.error.error) {
             await this.relogar(err.error.token)
             response(await this.post(url, body, err.error.token))
@@ -41,9 +40,9 @@ export class ApiService {
     const headerOptions = await this.montarHeader('get', token)
 
     return new Promise(async (response, error) => {
-      this.http.get(CURRENT_URL_API + url, { headers: headerOptions })
-        .subscribe(result => response(result),
-        async (err) => {
+      this.http.get(CURRENT_URL_API + url, { headers: headerOptions }).subscribe(
+        result => response(result),
+        async err => {
           if (err && err.error && this.JWTRefreshedToken == err.error.error) {
             await this.relogar(err.error.token)
             response(await this.get(url, err.error.token))
@@ -56,12 +55,12 @@ export class ApiService {
   }
 
   async montarHeader(tipoRequest, tokenNovo?) {
-    const token = tokenNovo || await this.storage.get('usuario-token')
+    const token = tokenNovo || (await this.storage.get('usuario-token'))
     const tokenFormatado = `Bearer ${token}`
 
     const headersOptions = {
       'Content-Type': 'application/json',
-      Authorization: tokenFormatado,
+      'Authorization': tokenFormatado,
     }
 
     if (!token) delete headersOptions['Authorization']
