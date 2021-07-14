@@ -11,6 +11,7 @@ import { PseudoTitleComponent } from './pseudo-title/pseudo-title.component'
 import { CadastroItemComponent } from './cadastro-item/cadastro-item.component'
 import { CapitulosRegiaoComponent } from './capitulos-regiao/capitulos-regiao.component'
 import { ContentComponent } from './content-dm/content.component'
+import { CapituloItemComponent } from './capitulo-item/capitulo-item.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ContentComponent } from './content-dm/content.component'
     PseudoTitleComponent,
     CadastroItemComponent,
     CapitulosRegiaoComponent,
+    CapituloItemComponent,
   ],
   entryComponents: [
     LoaderComponent,
@@ -34,6 +36,7 @@ import { ContentComponent } from './content-dm/content.component'
     PseudoTitleComponent,
     CadastroItemComponent,
     CapitulosRegiaoComponent,
+    CapituloItemComponent,
   ],
   imports: [FormsModule, IonicModule, CommonModule],
   exports: [
@@ -46,6 +49,7 @@ import { ContentComponent } from './content-dm/content.component'
     PseudoTitleComponent,
     CadastroItemComponent,
     CapitulosRegiaoComponent,
+    CapituloItemComponent,
   ],
 })
 export class ComponentsModule {}

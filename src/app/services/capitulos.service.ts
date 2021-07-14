@@ -39,4 +39,14 @@ export class CapitulosService {
       throw error
     }
   }
+
+  async getCapitulosAdmin() {
+    try {
+      const organizacoes = await this.apiCtrl.get('capitulos-admin')
+
+      return organizacoes
+    } catch (error) {
+      throw error
+    }
+  }
 }

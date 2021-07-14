@@ -1,13 +1,6 @@
 <div class="capitulos-lista">
   <ng-template ngFor let-capitulo [ngForOf]="capitulosDaRegiao">
     <!-- Criar comp -->
-    <div lines="none" class="item-capitulo" (click)="abrirCapituloDetalhado(capitulo)">
-      <h2>{{ capitulo.nome }}</h2>
-      <div class="item-capitulo-info">
-        <span>{{ capitulo.sigla }}</span>
-        <span>{{ capitulo.numero }}º</span>
-      </div>
-    </div>
-
+    <app-capitulo-item [capitulo]="capitulo" (click)="abrirCapituloDetalhado(capitulo)"></app-capitulo-item>
   </ng-template>
 </div>

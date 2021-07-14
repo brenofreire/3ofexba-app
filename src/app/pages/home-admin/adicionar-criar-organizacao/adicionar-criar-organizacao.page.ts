@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { ModalController } from '@ionic/angular'
 import { CapitulosService } from 'src/app/services/capitulos.service'
 import { UtilsService } from 'src/app/services/utils.service'
 
@@ -8,15 +9,17 @@ import { UtilsService } from 'src/app/services/utils.service'
   styleUrls: ['./adicionar-criar-organizacao.page.scss'],
 })
 export class AdicionarCriarOrganizacaoPage implements OnInit {
-  public capituloInfo: {
+  public organizacao: {
     nome: string
     numero: number
     sigla: string
     ofex: number
   }
+  organizacoes: any = []
+  carregandoOrgs: boolean = false
 
-  constructor(private capitulosCtrl: CapitulosService, private utilsCtrl: UtilsService) {
-    this.capituloInfo = this.factoryCapituloInfo('', null, '', null)
+  constructor(private capitulosCtrl: CapitulosService, private utilsCtrl: UtilsService, private modalCtrl: ModalController) {
+    this.organizacao = this.factoryCapituloInfo('', null, '', null)
   }
 
   ngOnInit() {}
@@ -30,12 +33,40 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
     loader.present()
 
     try {
-      this.capitulosCtrl.adicionarOuEditarOrganizacao(this.capituloInfo)
+      this.capitulosCtrl.adicionarOuEditarOrganizacao(this.organizacao)
+
+      this.utilsCtrl.mostrarAlert('Ação realizada com sucesso!', '')
+
+      this.organizacao = this.factoryCapituloInfo('', null, '', null)
     } catch (error) {
       const mensagem = (error && error.mensagem) || 'Houve um erro ao salvar informações'
       this.utilsCtrl.mostrarAlert(mensagem, 'Tente novamente mais tarde')
     } finally {
       loader.dismiss()
     }
+  }
+
+  async dismiss() {
+    await this.modalCtrl.dismiss()
+  }
+
+  setarOrgManuseada(organizacao) {
+    this.organizacao = organizacao
+  }
+
+  async getOrganizacoes() {
+    this.carregandoOrgs = true
+
+    try {
+      this.organizacoes = await this.capitulosCtrl.getCapitulosAdmin()
+    } catch (error) {
+      await this.utilsCtrl.mostrarAlert('Houve um erro ao buscar organizações', 'Tente novamente mais tarde')
+    } finally {
+      this.carregandoOrgs = false
+    }
+  }
+
+  get temOrganizacoes() {
+    return this.organizacoes && this.organizacoes.length
   }
 }

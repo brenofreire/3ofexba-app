@@ -1,18 +1,29 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Central de Capítulos</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="primary">Fechar</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-content>
-    <div>
-      <ion-input [(ngModel)]="capituloInfo.nome" placeholder="Nome"></ion-input>
-      <ion-input [(ngModel)]="capituloInfo.numero" type="number" placeholder="Número do Capítulo"></ion-input>
-      <ion-input [(ngModel)]="capituloInfo.sigla" placeholder="Email do usuário"></ion-input>
-      <ion-input [(ngModel)]="capituloInfo.ofex" placeholder="CID do usuário"></ion-input>
+  <div class="org-wrapper">
+    <ion-searchbar class="ion-no-padding" placeholder="Buscar por capítulo..." [(ngModel)]="termoBusca" (ionChange)="getOrganizacoes(true)">
+    </ion-searchbar>
 
-      <ion-button expand (click)="salvarInfo()">Salvar</ion-button>
-    </div>
-  </app-content>
+    <ion-input [(ngModel)]="organizacao.nome" placeholder="Nome"></ion-input>
+    <ion-input [(ngModel)]="organizacao.numero" type="number" placeholder="Número do Capítulo"></ion-input>
+    <ion-input [(ngModel)]="organizacao.sigla" placeholder="Sigla do Capítulo, exemplo: CCOD"></ion-input>
+    <ion-input [(ngModel)]="organizacao.ofex" type="number" placeholder="Número da Ofex"></ion-input>
+
+    <ion-button expand="block" (click)="salvarInfo()">Salvar</ion-button>
+
+    <app-loader *ngIf="carregandoOrgs" texto="Carregando informações..."></app-loader>
+
+    <ng-template [ngIf]="temOrganizacoes" ngFor let-organizacao [ngForOf]="organizacoes">
+      <app-capitulo-item [organizacao]="organizacao" (click)="setarOrgManuseada(organizacao)"></app-capitulo-item>
+    </ng-template>
+  </div>
 </ion-content>
