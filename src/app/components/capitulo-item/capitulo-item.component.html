@@ -1,7 +1,13 @@
 <div lines="none" class="item-capitulo">
-  <h2>{{ capitulo.nome }}</h2>
-  <div class="item-capitulo-info">
-    <span>{{ capitulo.sigla }}</span>
-    <span>{{ capitulo.numero }}º</span>
+  <div>
+    <h2>{{ capitulo.nome }}</h2>
+    <div class="item-capitulo-info">
+      <span>{{ capitulo.sigla }}</span>
+      <span>{{ capitulo.numero }}º</span>
+    </div>
   </div>
+
+  <ion-button color="danger" fill="clear" (click)="deleteCapitulo($event)">
+    <ion-icon name="trash"></ion-icon>
+  </ion-button>
 </div>

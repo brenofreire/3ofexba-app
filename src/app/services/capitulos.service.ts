@@ -49,4 +49,14 @@ export class CapitulosService {
       throw error
     }
   }
+
+  async deleteCapitulo(capitulo) {
+    try {
+      const organizacoes = await this.apiCtrl.post('capitulos/deletar', { capitulo })
+
+      return organizacoes
+    } catch (error) {
+      throw error
+    }
+  }
 }

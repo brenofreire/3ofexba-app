@@ -100,4 +100,8 @@ export class AdicionarCriarOrganizacaoPage implements OnInit {
     this.setarOrgManuseada({})
     this.setFrozenOrganizacao('')
   }
+
+  removeOrgFromArray(org) {
+    this.organizacoes = this.organizacoes && this.organizacoes.filter(inner => inner.id !== org.id)
+  }
 }

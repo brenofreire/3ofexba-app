@@ -29,7 +29,7 @@
 
     <ng-template [ngIf]="temOrganizacoes">
       <div *ngFor="let org of organizacoes">
-        <app-capitulo-item [capitulo]="org" (click)="setarOrgManuseada(org)"></app-capitulo-item>
+        <app-capitulo-item [capitulo]="org" (click)="setarOrgManuseada(org)" (deleteMe)="removeOrgFromArray(org)"></app-capitulo-item>
       </div>
     </ng-template>
   </div>
