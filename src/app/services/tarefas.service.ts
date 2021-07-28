@@ -54,13 +54,13 @@ export class TarefasService {
           handler: async () => {
             this.tarefa = options.tarefa
 
-            if (this.usuario.role !== 'admin' && this.tarefa.statusCapitulo > 3) {
+            if (!this.podeAlterarAtividadeComoAdmin(this.usuario.role) && this.tarefa.statusCapitulo > 3) {
               return await this.utilsCtrl.mostrarToast('Você não pode mudar o status de atividades recusadas ou aprovadas')
             }
 
             const cargosPermitidosParaEditar: any[] = this.tarefa.cargo_tarefa
 
-            if (cargosPermitidosParaEditar === options.cargo || this.usuario.role === 'admin') {
+            if (cargosPermitidosParaEditar === options.cargo || this.podeAlterarAtividadeComoAdmin(this.usuario.role)) {
               const alertMudarStatus = await this.alertMudarStatus({
                 tarefa: this.tarefa,
               })
@@ -100,7 +100,13 @@ export class TarefasService {
     return actionSheet
   }
 
+  private podeAlterarAtividadeComoAdmin(role: string) {
+    return ['admin', 'regional'].includes(role)
+  }
+
   public async alertMudarStatus(options: { tarefa: any }) {
+    const disabled = !this.podeAlterarAtividadeComoAdmin(this.usuario.role)
+
     const alertMudarStatus = await this.alertCtrl.create({
       header: 'Mudar status da atividade',
       subHeader: 'O campo marcado, mostra o status da atividade atualmente',
@@ -147,7 +153,7 @@ export class TarefasService {
           label: 'Atividade devolvida',
           value: 'atividade-devolvida',
           checked: this.tarefa.statusCapitulo === 3,
-          disabled: this.usuario.role !== 'admin',
+          disabled,
           async handler(data) {
             return await alertMudarStatus.dismiss({
               ...data,
@@ -160,7 +166,7 @@ export class TarefasService {
           label: 'Atividade recusada',
           value: 'atividade-recusada',
           checked: this.tarefa.statusCapitulo === 4,
-          disabled: this.usuario.role !== 'admin',
+          disabled,
           async handler(data) {
             return await alertMudarStatus.dismiss({
               ...data,
@@ -173,7 +179,7 @@ export class TarefasService {
           label: 'Atividade aprovada',
           value: 'atividade-aprovada',
           checked: this.tarefa.statusCapitulo === 5,
-          disabled: this.usuario.role !== 'admin',
+          disabled,
           async handler(data) {
             return await alertMudarStatus.dismiss({
               ...data,
@@ -195,7 +201,7 @@ export class TarefasService {
           tipoCampanha: options.tarefa.tipo,
           status: options.tarefa.status,
           idCapitulo: options.tarefa.idCapitulo,
-          cargo: options.tarefa.cargo_tarefa
+          cargo: options.tarefa.cargo_tarefa,
         })
 
         await this.utilsCtrl.mostrarToast('Atividade enviada com sucesso')
@@ -211,18 +217,17 @@ export class TarefasService {
       return options.tarefa.status
     } catch (error) {
       const [mensagem, dica]: any[] = error && error.mensagem
-      if(mensagem) {
+      if (mensagem) {
         await this.utilsCtrl.mostrarAlert(mensagem, dica)
-
       } else {
         await this.utilsCtrl.mostrarAlert('Houve um erro ao mudar status da atividade', 'Tente novamente mais tarde')
-      }      
+      }
 
       throw error
     }
   }
 
-  public async enviarTarefa(options: { slugCampanha; tipoCampanha; status?, idCapitulo, cargo }) {
+  public async enviarTarefa(options: { slugCampanha; tipoCampanha; status?; idCapitulo; cargo }) {
     try {
       const criaTarefa = await this.apiCtrl.post('tarefas', options)
 
